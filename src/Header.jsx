@@ -24,7 +24,7 @@ const Header = () => {
               </Grid>
               <Grid item >
                 <Typography className={classes.typographyStyles}>
-                  Batak Plus Restraunt
+                  Restraunt
                 </Typography>
               </Grid>
             </Grid>
