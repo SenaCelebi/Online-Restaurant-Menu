@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia'
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -21,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold'
   },
 }));
+
 
 const MealCard = (props) => {
   const classes = useStyles();

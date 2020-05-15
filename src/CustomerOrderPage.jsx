@@ -12,6 +12,8 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { dessertList, soapList, mealList } from "./constants";
 import Collapsible from "./Collapsible";
+import firebase from "./Config";
+
 
 const CustomerOrderPage = () => {
   const styles = (theme) => ({

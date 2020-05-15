@@ -7,6 +7,7 @@ import purple from "@material-ui/core/colors/purple";
 import { Route, Switch } from 'react-router-dom'
 import KitchenOrdersPage from "./KitchenOrdersPage";
 import KitchenMenuPage from "./KitchenMenuPage";
+import firebase from "./Config";
 
 const App = () => {
   const theme = createMuiTheme({

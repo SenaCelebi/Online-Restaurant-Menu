@@ -4,6 +4,8 @@ import { Grid, Button } from "@material-ui/core";
 import RestaurantIcon from '@material-ui/icons/Restaurant';
 import { makeStyles } from "@material-ui/styles";
 import { Link } from "react-router-dom";
+import firebase from "./Config";
+
 
 const useStyles = makeStyles(() => ({
   typographyStyles: {
@@ -12,6 +14,7 @@ const useStyles = makeStyles(() => ({
     fontWeight: 'bold'
   },
 }));
+
 
 const Header = () => {
   const classes = useStyles();
