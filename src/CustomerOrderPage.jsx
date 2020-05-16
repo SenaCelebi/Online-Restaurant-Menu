@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {
   Grid,
   Card,
@@ -14,8 +14,14 @@ import { dessertList, soapList, mealList } from "./constants";
 import Collapsible from "./Collapsible";
 import firebase from "./Config";
 
+  /*var firebaseheading = firebase.database().ref().child("heading");
+  firebaseheading.on('value', function(datasnapshot){
+    var xx = datasnapshot;
+    console.log(tit);
+  });*/
 
-const CustomerOrderPage = () => {
+  const CustomerOrderPage = () => {
+
   const styles = (theme) => ({
     card: {
       backgroundColor: theme.palette.secondary.main,
@@ -30,6 +36,17 @@ const CustomerOrderPage = () => {
   });
 
   const classes = useStyles();
+
+  //Retrieving data from firebase
+
+  const [tit, setTit] = useState(null);
+  
+  useEffect(() => {   
+    firebase.database().ref('heading').on('value',(snap)=>{
+    setTit(snap.val());
+    console.log(tit);
+    console.log(snap.val()); 
+  })}, [])
 
   return (
     <div>
@@ -47,7 +64,7 @@ const CustomerOrderPage = () => {
         />
         <CardContent>
           <CardHeader
-            title={"Table 5"}
+            title={"" + tit}
             subheader={"Create your order for table 5"}
           ></CardHeader>
           <Grid container direction="column" spacing={4}>
