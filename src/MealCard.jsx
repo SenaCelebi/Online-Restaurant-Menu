@@ -26,18 +26,18 @@ const useStyles = makeStyles((theme) => ({
 
 const MealCard = (props) => {
   const classes = useStyles();
-  const { title, subtitle, description, imageUrl, buttons } = props;
+  const { MeaLAvailability, MealDesc, MealImage, MealName, MealPrice, buttons } = props;
   return (
     <Card className={classes.root} raised>
       <div className={classes.details}>
         <CardHeader
-          title={title}
-          subheader={subtitle}
+          title={MealName}
+          subheader={"$" + MealPrice}
         />
-        <CardMedia style={{ height: "170px" }} image={imageUrl} />
+        <CardMedia style={{ height: "170px" }} image={MealImage} />
         <CardContent>
           <Typography variant="body2" component="p">
-            {description}
+            {MealDesc}
           </Typography>
         </CardContent>
         <CardActions>

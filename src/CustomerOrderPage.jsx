@@ -40,13 +40,51 @@ import firebase from "./Config";
   //Retrieving data from firebase
 
   const [tit, setTit] = useState(null);
-  
+
   useEffect(() => {   
     firebase.database().ref('heading').on('value',(snap)=>{
     setTit(snap.val());
     console.log(tit);
     console.log(snap.val()); 
   })}, [])
+
+  //Retrieving Soaps
+
+  const[soapsMenu, setSoapMenu] = useState(soapList);
+
+  useEffect(() => {   
+    firebase.database().ref('Menu/Soaps').on('value',(snap)=>{
+    setSoapMenu(Object.values(snap.val()));
+    console.log(soapsMenu);
+    console.log(snap.val()); 
+    console.log(Object.values(snap.val()));
+  })}, [])
+
+    //Retrieving Dessertes
+
+    const[dessertsMenu, setDessertsMenu] = useState(dessertList);
+
+    useEffect(() => {   
+      firebase.database().ref('Menu/Desserts').on('value',(snap)=>{
+      setDessertsMenu(Object.values(snap.val()));
+      console.log(dessertsMenu);
+      console.log(snap.val()); 
+      console.log(Object.values(snap.val()));
+    })}, [])
+
+    //Retrieving Meals
+
+    const[mealsMeanu, setMealsMeanu] = useState(mealList);
+
+    useEffect(() => {   
+      firebase.database().ref('Menu/Meals').on('value',(snap)=>{
+      setMealsMeanu(Object.values(snap.val()));
+      console.log(mealsMeanu);
+      console.log(snap.val()); 
+      console.log(Object.values(snap.val()));
+    })}, [])
+  
+
 
   return (
     <div>
@@ -70,21 +108,21 @@ import firebase from "./Config";
           <Grid container direction="column" spacing={4}>
             <Grid item>
               <Collapsible
-                list={soapList}
+                list={soapsMenu}
                 title={"Soaps"}
                 subtitle={"Select a soap"}
               />
             </Grid>
             <Grid item>
               <Collapsible
-                list={mealList}
+                list={mealsMeanu}
                 title={"Meals"}
                 subtitle={"Select a meal"}
               />
             </Grid>
             <Grid item>
               <Collapsible
-                list={dessertList}
+                list={dessertsMenu}
                 title={"Desserts"}
                 subtitle={"Select a dessert"}
               />
