@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -28,25 +28,39 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function writeUserData(MealName, MealPrice) {
-  firebase.database().ref('Orders/Table2/OrderID/Meals/MealID').set({
+function writeUserData(MealName, MealPrice, MealId) {
+  firebase.database().ref('Orders/Table2/OrderID/Meals/' + MealId).set({
     MealName: MealName,
     MealPrice: MealPrice
   });
 }
 
-const ref = firebase.database().ref('Orders/Table2/OrderID/Meals/MealID');
- 
+
+const arrayOfOrder = [];
 const MealCard = (props) => {
+
+  const [orderList, setOrderList] = useState(null);
 
   const [cart, setCart] = useContext(CartContext);
 
   const addToCart = () => {
-    const meal = { name: props.MealName, price: props.MealPrice };
-    writeUserData(meal.name, meal.price);
+    const meal = { name: props.MealName, price: props.MealPrice, id: props.MealId };
+    setOrderList(meal);
+   // writeUserData(meal.name, meal.price, meal.id);
     setCart(currentState => [...currentState, meal]);
     console.log(meal);
     
+  }
+
+  arrayOfOrder.push(orderList);
+  console.log(orderList);
+  console.log(arrayOfOrder);
+  
+
+  for (var i = 0; i < arrayOfOrder.length; i++) {
+    if(arrayOfOrder[i] != null){
+      writeUserData(arrayOfOrder[i].name, arrayOfOrder[i].price, i);
+    }
   }
 
   const classes = useStyles();
