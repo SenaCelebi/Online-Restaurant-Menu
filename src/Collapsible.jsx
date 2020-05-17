@@ -15,6 +15,11 @@ import { Grid } from "@material-ui/core";
 
 import cyan from "@material-ui/core/colors/cyan";
 
+import { CartProvider } from './CartContext';
+
+import firebase from "./Config"
+
+
 const Collapsible = ({ title, subtitle, list, isManager }) => {
   const useStyles = makeStyles((theme) => ({
     column: {
@@ -26,13 +31,18 @@ const Collapsible = ({ title, subtitle, list, isManager }) => {
     },
   }));
 
+
   const buttons = isManager
     ? [{ title: "EDIT" }, { title: "DELETE" }]
     : [{ title: "ADD" }, { title: "INGREDIENTS" }];
   const getMenuItem = (menuObj) => {
+    console.log(menuObj); 
     return (
       <Grid item xs={12} sm={6}>
-        <MealCard buttons={buttons} {...menuObj} />
+        <CartProvider>
+        <MealCard buttons={buttons}  {...menuObj} 
+        key={menuObj.MealId}/>
+        </CartProvider>
       </Grid>
     );
   };
@@ -75,3 +85,4 @@ const Collapsible = ({ title, subtitle, list, isManager }) => {
 };
 
 export default Collapsible;
+
