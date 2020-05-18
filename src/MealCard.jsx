@@ -63,6 +63,25 @@ const MealCard = (props) => {
     }
   }
 
+  const deleteToCart = () => {
+    const meal = { name: props.MealName, price: props.MealPrice, id: props.MealId };
+    for (var i = 0; i < arrayOfOrder.length; i++) {
+      if (arrayOfOrder[i] != null) {
+        if (arrayOfOrder[i].name == meal.name) {
+          let deletedRef = firebase.database().ref('Orders/Table2/OrderID/Meals/' + i);
+          deletedRef.remove();
+          arrayOfOrder[i] = null;
+          break;
+        }
+      }
+    }
+    console.log(arrayOfOrder);
+    //setOrderList(meal);
+    // writeUserData(meal.name, meal.price, meal.id);
+    // setCart(currentState => [...currentState, meal]);
+    //console.log(meal);
+  }
+
   const classes = useStyles();
   const { MeaLAvailability, MealDesc, MealId, MealImage, MealName, MealPrice , buttons} = props;
 
@@ -91,6 +110,7 @@ const MealCard = (props) => {
         </CardContent>
         <CardActions>
         <Button id="hello" size="small" onClick={addToCart} >ADD</Button>
+        <Button id="delete" size="small" onClick={deleteToCart}>DELETE</Button>
         {/* {buttons.map(button => <Button size="small">{button.title}</Button>)}  */}
         </CardActions>
       </div>
