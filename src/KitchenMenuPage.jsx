@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {
   Grid,
   Card,
@@ -9,6 +9,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { mealList, soapList, dessertList } from "./constants";
 import KitchenMenuItem from './KitchenMenuItem';
+import firebase from "./Config";
 
 const KitchenMenuPage = () => {
   const useStyles = makeStyles({
@@ -32,6 +33,43 @@ const KitchenMenuPage = () => {
 
   const classes = useStyles();
 
+    //Retrieving Soaps
+
+    const[soapsMenu, setSoapMenu] = useState(soapList);
+
+    useEffect(() => {   
+      firebase.database().ref('Menu/Soaps').on('value',(snap)=>{
+      setSoapMenu(Object.values(snap.val()));
+      console.log(soapsMenu);
+      console.log(snap.val()); 
+      console.log(Object.values(snap.val()));
+    })}, [])
+  
+      //Retrieving Dessertes
+  
+      const[dessertsMenu, setDessertsMenu] = useState(dessertList);
+  
+      useEffect(() => {   
+        firebase.database().ref('Menu/Desserts').on('value',(snap)=>{
+        setDessertsMenu(Object.values(snap.val()));
+        console.log(dessertsMenu);
+        console.log(snap.val()); 
+        console.log(Object.values(snap.val()));
+      })}, [])
+  
+      //Retrieving Meals
+  
+      const[mealsMeanu, setMealsMeanu] = useState(mealList);
+  
+      useEffect(() => {   
+        firebase.database().ref('Menu/Meals').on('value',(snap)=>{
+        setMealsMeanu(Object.values(snap.val()));
+        console.log(mealsMeanu);
+        console.log(snap.val()); 
+        console.log(Object.values(snap.val()));
+      })}, [])
+    
+
   return (
     <div>
       <Card style={{ backgroundColor: "#ffffff" }} raised>
@@ -49,9 +87,9 @@ const KitchenMenuPage = () => {
         <CardContent>
           <Grid container direction="column" spacing={4}>
             
-          <KitchenMenuItem list={soapList} title={"Soaps"} subtitle={"Soaps in the Menu"} />
-          <KitchenMenuItem list={mealList} title={"Meals"} subtitle={"Meals in the Menu"} />
-          <KitchenMenuItem list={dessertList} title={"Desserts"} subtitle={"Desserts in the Menu"} />
+          <KitchenMenuItem list={soapsMenu} title={"Soaps"} subtitle={"Soaps in the Menu"} />
+          <KitchenMenuItem list={mealsMeanu} title={"Meals"} subtitle={"Meals in the Menu"} />
+          <KitchenMenuItem list={dessertsMenu} title={"Desserts"} subtitle={"Desserts in the Menu"} />
 
 
           </Grid>

@@ -52,10 +52,10 @@ const KitchenMenuItem = ({ list, title, subtitle }) => {
                 <Paper className={classes.paperStyles}>
                   <Grid container>
                   <Grid item xs={1}>
-                  <Avatar alt="Cindy Baker" src={item.imageUrl} />
+                  <Avatar alt="Cindy Baker" src={item.MealImage} />
                   </Grid>
                     <Grid item xs={8}>
-                      {item.title}
+                      {item.MealName}
                     </Grid>
                     <Grid item xs={3}>
                       <Button size="small">Available</Button>
