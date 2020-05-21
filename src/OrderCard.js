@@ -15,22 +15,16 @@ const OrderCard = ({orderItem}) => {
     
       <Card raised>
         <div>
-          <CardHeader title={orderItem.title} />
+          <CardHeader title={orderItem.key} />
           <CardMedia
             style={{ height: "60px" }}
             image={"https://www.barazzi.com/img/c/10.jpg"}
           />
           <CardContent>
             <Typography variant="body2" component="p">
-             {orderItem.meals.map( meal =>  <Grid container>
+             {Object.values(orderItem.Meals).map( meal =>  <Grid container>
                     <Grid item xs={7}>
-                      {meal.name}
-                    </Grid>
-                    <Grid item xs={5}>
-                      <Button size="small" color="secondary">
-                        In progress
-                      </Button>
-                      <Button size="small">Ready</Button>
+                      {meal.MealName}
                     </Grid>
                   </Grid> )}
             </Typography>

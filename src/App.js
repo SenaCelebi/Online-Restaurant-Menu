@@ -7,6 +7,7 @@ import purple from "@material-ui/core/colors/purple";
 import { Route, Switch } from 'react-router-dom'
 import KitchenOrdersPage from "./KitchenOrdersPage";
 import KitchenMenuPage from "./KitchenMenuPage";
+import ShowOrderPage from "./ShowOrderPage";
 import firebase from "./Config";
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
               <Route path="/orders" component={CustomerOrderPage} />
               <Route exact path="/kitchen/orders" component={KitchenOrdersPage} />
               <Route exact path="/kitchen/menu" component={KitchenMenuPage} />
+              <Route exact path="/show-order" component={ShowOrderPage} />
             </Switch>
           </Grid>
           <Grid item xs={false} sm={2} />

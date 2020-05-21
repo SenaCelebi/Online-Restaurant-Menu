@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {
   Grid,
   Card,
@@ -12,6 +12,9 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { orderList } from "./constants";
 import OrderCard from "./OrderCard";
+import firebase from "./Config";
+
+
 
 const KitchenOrdersPage = () => {
   const useStyles = makeStyles({
@@ -19,6 +22,13 @@ const KitchenOrdersPage = () => {
       minWidth: 275,
     },
   });
+
+  const[orderMenu, setOrderMenu] = useState(orderList);
+
+  useEffect(() => {   
+  firebase.database().ref('Orders').on('value',(snap)=>{
+    setOrderMenu(Object.values(snap.val()));
+})}, [])
 
   const classes = useStyles();
 
@@ -38,7 +48,8 @@ const KitchenOrdersPage = () => {
         ></CardHeader>
         <CardContent>
           <Grid container spacing={4}>
-            {orderList.map((table) => (
+            {console.log(orderMenu)}
+            {orderMenu.map((table) => (
               <Grid item xs={12} md={6}>
                 <OrderCard orderItem={table} />
               </Grid>

@@ -20,7 +20,7 @@ import firebase from "./Config";
     console.log(tit);
   });*/
 
-  const CustomerOrderPage = () => {
+  const ShowOrderPage = () => {
 
   const styles = (theme) => ({
     card: {
@@ -37,45 +37,14 @@ import firebase from "./Config";
 
   const classes = useStyles();
 
-  //Retrieving data from firebase
-
-  const [tit, setTit] = useState(null);
-
-  useEffect(() => {   
-    firebase.database().ref('heading').on('value',(snap)=>{
-    setTit(snap.val());
-    console.log(tit);
-    console.log(snap.val()); 
-  })}, [])
-
-  //Retrieving Soaps
-
-  const[soapsMenu, setSoapMenu] = useState(soapList);
-
-  useEffect(() => {   
-    firebase.database().ref('Menu/Soaps').on('value',(snap)=>{
-    setSoapMenu(Object.values(snap.val()));
-    
-  })}, [])
-
-    //Retrieving Dessertes
-
-    const[dessertsMenu, setDessertsMenu] = useState(dessertList);
-
-    useEffect(() => {   
-      firebase.database().ref('Menu/Desserts').on('value',(snap)=>{
-      setDessertsMenu(Object.values(snap.val()));
-      
-    })}, [])
-
     //Retrieving Meals
 
     const[mealsMeanu, setMealsMeanu] = useState(mealList);
 
     useEffect(() => {   
-      firebase.database().ref('Menu/Meals').on('value',(snap)=>{
+      firebase.database().ref('Orders/Table2/Meals').on('value',(snap)=>{
       setMealsMeanu(Object.values(snap.val()));
-      
+      console.log(mealsMeanu);
     })}, [])
 
   
@@ -96,37 +65,19 @@ import firebase from "./Config";
         />
         <CardContent>
           <CardHeader
-            title={"" + tit}
+            title={"Orders"}
             subheader={"Create your order for table 5"}
           ></CardHeader>
           <Grid container direction="column" spacing={4}>
             <Grid item>
-              <Collapsible
-                list={soapsMenu}
-                title={"Soaps"}
-                subtitle={"Select a soap"}
-              />
-            </Grid>
-            <Grid item>
-              <Collapsible
-                list={mealsMeanu}
-                title={"Meals"}
-                subtitle={"Select a meal"}
-              />
-            </Grid>
-            <Grid item>
-              <Collapsible
-                list={dessertsMenu}
-                title={"Desserts"}
-                subtitle={"Select a dessert"}
-              />
+              
             </Grid>
             <Grid item>
               <Card className={classes.root}>
               <CardHeader title={"Orders"}/>
                 <CardContent>
                   <Typography variant="body2" component="p">
-                    Pree show Order Button to see your orders. + 
+                   {mealsMeanu.map(mealsMeanu => <div>{mealsMeanu.MealName + ":            $" + mealsMeanu.MealPrice}</div>)}
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -141,4 +92,4 @@ import firebase from "./Config";
   );
 };
 
-export default CustomerOrderPage;
+export default ShowOrderPage;

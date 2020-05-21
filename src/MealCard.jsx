@@ -28,10 +28,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function writeUserData(MealName, MealPrice, MealId) {
-  firebase.database().ref('Orders/Table2/OrderID/Meals/' + MealId).set({
+function writeUserData(MealName, MealPrice, MealId, MealCount) {
+  firebase.database().ref('Orders/Table4/Meals/' + MealId).set({
     MealName: MealName,
-    MealPrice: MealPrice
+    MealPrice: MealPrice,
+    MealCount: MealCount
   });
 }
 
@@ -59,7 +60,7 @@ const MealCard = (props) => {
 
   for (var i = 0; i < arrayOfOrder.length; i++) {
     if(arrayOfOrder[i] != null){
-      writeUserData(arrayOfOrder[i].name, arrayOfOrder[i].price, i);
+      writeUserData(arrayOfOrder[i].name, arrayOfOrder[i].price, arrayOfOrder[i].id, 0);
     }
   }
 
@@ -68,7 +69,7 @@ const MealCard = (props) => {
     for (var i = 0; i < arrayOfOrder.length; i++) {
       if (arrayOfOrder[i] != null) {
         if (arrayOfOrder[i].name == meal.name) {
-          let deletedRef = firebase.database().ref('Orders/Table2/OrderID/Meals/' + i);
+          let deletedRef = firebase.database().ref('Orders/Table4/Meals/' + arrayOfOrder[i].id);
           deletedRef.remove();
           arrayOfOrder[i] = null;
           break;

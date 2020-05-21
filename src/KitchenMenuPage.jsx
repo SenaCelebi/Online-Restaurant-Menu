@@ -11,6 +11,8 @@ import { mealList, soapList, dessertList } from "./constants";
 import KitchenMenuItem from './KitchenMenuItem';
 import firebase from "./Config";
 
+import { CartProvider } from './CartContext';
+
 const KitchenMenuPage = () => {
   const useStyles = makeStyles({
     root: {
@@ -68,10 +70,13 @@ const KitchenMenuPage = () => {
         console.log(snap.val()); 
         console.log(Object.values(snap.val()));
       })}, [])
-    
 
+      const MealsObject = Object.assign({}, ...mealsMeanu)
+      console.log(MealsObject);
+    
   return (
     <div>
+      <CartProvider>
       <Card style={{ backgroundColor: "#ffffff" }} raised>
         <CardMedia
           component="img"
@@ -86,15 +91,13 @@ const KitchenMenuPage = () => {
         ></CardHeader>
         <CardContent>
           <Grid container direction="column" spacing={4}>
-            
-          <KitchenMenuItem list={soapsMenu} title={"Soaps"} subtitle={"Soaps in the Menu"} />
-          <KitchenMenuItem list={mealsMeanu} title={"Meals"} subtitle={"Meals in the Menu"} />
-          <KitchenMenuItem list={dessertsMenu} title={"Desserts"} subtitle={"Desserts in the Menu"} />
-
-
+          <KitchenMenuItem list={soapsMenu} title={"Soaps"} subtitle={"Soaps in the Menu"} {...MealsObject}/>
+          <KitchenMenuItem list={mealsMeanu} title={"Meals"} subtitle={"Meals in the Menu"} {...MealsObject} />
+          <KitchenMenuItem list={dessertsMenu} title={"Desserts"} subtitle={"Desserts in the Menu"} {...MealsObject} />
           </Grid>
         </CardContent>
       </Card>
+      </CartProvider>
     </div>
   );
 };

@@ -104,35 +104,35 @@ export const mealList = [
 ];
 
 export const orderList = [{
-  title: "Table 1",
-  meals: [{name: "Meal Number 1"},
-  {name: "Meal Number 2"},
-  {name: "Meal Number 3"},
-  {name: "Meal Number 4"}
+  title: "Table1",
+  Meals: [{MealName: "Meal Number 1"},
+  {MealName: "Meal Number 2"},
+  {MealName: "Meal Number 3"},
+  {MealName: "Meal Number 4"}
   ]
   },
   {
-  title: "Table 2",
-  meals: [{name: "Meal Number 1"},
-  {name: "Meal Number 2"},
-  {name: "Meal Number 3"},
-  {name: "Meal Number 4"}
+  title: "Table2",
+  Meals: [{MealName: "Meal Number 1", MealPrice:10},
+  {MealName: "Meal Number 2", MealPrice:10},
+  {MealName: "Meal Number 3", MealPrice:10},
+  {MealName: "Meal Number 4", MealPrice:10}
   ]
   },
   {
   title: "Table 3",
-  meals: [{name: "Meal Number 1"},
-  {name: "Meal Number 2"},
-  {name: "Meal Number 3"},
-  {name: "Meal Number 4"}
+  Meals: [{MealName: "Meal Number 1", MealPrice:10},
+  {MealName: "Meal Number 2", MealPrice:10},
+  {MealName: "Meal Number 3", MealPrice:10},
+  {MealName: "Meal Number 4", MealPrice:10}
   ]
   },
   {
   title: "Table 4",
-  meals: [{name: "Meal Number 1"},
-  {name: "Meal Number 2"},
-  {name: "Meal Number 3"},
-  {name: "Meal Number 4"}
+  Meals: [{MealName: "Meal Number 1", MealPrice:10},
+  {MealName: "Meal Number 2", MealPrice:10},
+  {MealName: "Meal Number 3", MealPrice:10},
+  {MealName: "Meal Number 4", MealPrice:10}
   ]
   }
   
