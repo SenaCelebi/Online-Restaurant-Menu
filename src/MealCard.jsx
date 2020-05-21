@@ -28,11 +28,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+
 function writeUserData(MealName, MealPrice, MealId, MealCount) {
-  firebase.database().ref('Orders/Table4/Meals/' + MealId).set({
+  var d = new Date();
+  var timestamp = d.getTime();
+  console.log(timestamp);
+  firebase.database().ref('Orders/Table4/Meals/' + timestamp).set({
     MealName: MealName,
-    MealPrice: MealPrice,
-    MealCount: MealCount
+    MealPrice: MealPrice
   });
 }
 
@@ -47,7 +50,7 @@ const MealCard = (props) => {
   const addToCart = () => {
     const meal = { name: props.MealName, price: props.MealPrice, id: props.MealId };
     setOrderList(meal);
-   // writeUserData(meal.name, meal.price, meal.id);
+    writeUserData(meal.name, meal.price, meal.id);
     setCart(currentState => [...currentState, meal]);
     console.log(meal);
     
@@ -58,11 +61,11 @@ const MealCard = (props) => {
   console.log(arrayOfOrder);
   
 
-  for (var i = 0; i < arrayOfOrder.length; i++) {
+  /*for (var i = 0; i < arrayOfOrder.length; i++) {
     if(arrayOfOrder[i] != null){
       writeUserData(arrayOfOrder[i].name, arrayOfOrder[i].price, arrayOfOrder[i].id, 0);
     }
-  }
+  }*/
 
   const deleteToCart = () => {
     const meal = { name: props.MealName, price: props.MealPrice, id: props.MealId };
