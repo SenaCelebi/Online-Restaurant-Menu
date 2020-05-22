@@ -47,7 +47,12 @@ import firebase from "./Config";
       console.log(mealsMeanu);
     })}, [])
 
-  
+    var updatedMenu = [];
+    for(var i=0; i<mealsMeanu.length; i++){
+      if(mealsMeanu[i].MealPrice != 0){
+        updatedMenu.push(mealsMeanu[i]);
+      }
+    } 
 
   return (
     <div>
@@ -77,7 +82,7 @@ import firebase from "./Config";
               <CardHeader title={"Orders"}/>
                 <CardContent>
                   <Typography variant="body2" component="p">
-                   {mealsMeanu.map(mealsMeanu => <div>{mealsMeanu.MealName + ":            $" + mealsMeanu.MealPrice}</div>)}
+                   {updatedMenu.map(updatedMenu => <div>{updatedMenu.MealName + ":            $" + updatedMenu.MealPrice}</div>)}
                   </Typography>
                 </CardContent>
                 <CardActions>
