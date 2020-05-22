@@ -41,6 +41,8 @@ import firebase from "./Config";
 
     const[mealsMeanu, setMealsMeanu] = useState(mealList);
 
+    var totalPrice = 0;
+
     useEffect(() => {   
       firebase.database().ref('Orders/Table4/Meals').on('value',(snap)=>{
       setMealsMeanu(Object.values(snap.val()));
@@ -53,6 +55,11 @@ import firebase from "./Config";
         updatedMenu.push(mealsMeanu[i]);
       }
     } 
+
+    for(var i=0; i<updatedMenu.length; i++){
+      totalPrice += updatedMenu[i].MealPrice;
+    }
+
 
   return (
     <div>
@@ -86,7 +93,7 @@ import firebase from "./Config";
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="Big" >ORDER</Button>
+                  <Button size="Big" >Total Price: ${totalPrice}</Button>
                 </CardActions>
               </Card>
             </Grid>
