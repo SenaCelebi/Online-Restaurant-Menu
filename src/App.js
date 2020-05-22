@@ -34,7 +34,7 @@ const App = () => {
               <Route path="/orders" component={CustomerOrderPage} />
               <Route exact path="/kitchen/orders" component={KitchenOrdersPage} />
               <Route exact path="/kitchen/menu" component={KitchenMenuPage} />
-              <Route exact path="/show-order" component={ShowOrderPage} />
+              <Route exact path="/showOrders" component={ShowOrderPage} />
             </Switch>
           </Grid>
           <Grid item xs={false} sm={2} />

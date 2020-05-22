@@ -42,7 +42,7 @@ import firebase from "./Config";
     const[mealsMeanu, setMealsMeanu] = useState(mealList);
 
     useEffect(() => {   
-      firebase.database().ref('Orders/Table2/Meals').on('value',(snap)=>{
+      firebase.database().ref('Orders/Table4/Meals').on('value',(snap)=>{
       setMealsMeanu(Object.values(snap.val()));
       console.log(mealsMeanu);
     })}, [])
@@ -65,8 +65,8 @@ import firebase from "./Config";
         />
         <CardContent>
           <CardHeader
-            title={"Orders"}
-            subheader={"Create your order for table 5"}
+            title={"Orders For Table5"}
+            subheader={"Look at your orders. If you want to add or delete meals from your orders you can turn bact to Menu."}
           ></CardHeader>
           <Grid container direction="column" spacing={4}>
             <Grid item>

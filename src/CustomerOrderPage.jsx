@@ -13,6 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { dessertList, soapList, mealList } from "./constants";
 import Collapsible from "./Collapsible";
 import firebase from "./Config";
+import { Link } from "react-router-dom";
 
   /*var firebaseheading = firebase.database().ref().child("heading");
   firebaseheading.on('value', function(datasnapshot){
@@ -34,6 +35,7 @@ import firebase from "./Config";
       minWidth: 275,
     }
   });
+
 
   const classes = useStyles();
 
@@ -121,19 +123,7 @@ import firebase from "./Config";
                 subtitle={"Select a dessert"}
               />
             </Grid>
-            <Grid item>
-              <Card className={classes.root}>
-              <CardHeader title={"Orders"}/>
-                <CardContent>
-                  <Typography variant="body2" component="p">
-                    Pree show Order Button to see your orders. + 
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="Big" >ORDER</Button>
-                </CardActions>
-              </Card>
-            </Grid>
+            <Button size="Big" component={Link} to={'/showOrders'}>THE ORDERS</Button>
           </Grid>
         </CardContent>
       </Card>

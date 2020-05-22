@@ -7,6 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import { dessertList, soapList, mealList } from "./constants";
 
 import firebase from "./Config";
 
@@ -28,19 +29,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
-function writeUserData(MealName, MealPrice, MealId, MealCount) {
+function writeUserData(MealName, MealPrice, MealId, timestamp) {
   var d = new Date();
-  var timestamp = d.getTime();
+  timestamp = d.getTime();
   console.log(timestamp);
   firebase.database().ref('Orders/Table4/Meals/' + timestamp).set({
     MealName: MealName,
-    MealPrice: MealPrice
+    MealPrice: MealPrice,
+    TimeStamp: timestamp
   });
 }
 
 
 const arrayOfOrder = [];
+const arrayOfTimestamp = [];
 const MealCard = (props) => {
 
   const [orderList, setOrderList] = useState(null);
@@ -48,9 +50,9 @@ const MealCard = (props) => {
   const [cart, setCart] = useContext(CartContext);
 
   const addToCart = () => {
-    const meal = { name: props.MealName, price: props.MealPrice, id: props.MealId };
+    const meal = { name: props.MealName, price: props.MealPrice, id: props.MealId, timestamp:0 };
     setOrderList(meal);
-    writeUserData(meal.name, meal.price, meal.id);
+    writeUserData(meal.name, meal.price, meal.id, meal.timestamp);
     setCart(currentState => [...currentState, meal]);
     console.log(meal);
     
@@ -67,18 +69,34 @@ const MealCard = (props) => {
     }
   }*/
 
+  const[mealsMeanu, setMealsMeanu] = useState(mealList);
+ 
+    useEffect(() => {   
+      firebase.database().ref('Orders/Table4/Meals').on('value',(snap)=>{
+        setMealsMeanu(Object.values(snap.val()));
+        console.log(mealsMeanu);
+    })}, [])
+
   const deleteToCart = () => {
-    const meal = { name: props.MealName, price: props.MealPrice, id: props.MealId };
-    for (var i = 0; i < arrayOfOrder.length; i++) {
+    console.log(mealsMeanu);
+    const meal = { name: props.MealName, price: props.MealPrice, id: props.MealId, time: props.TimeStamp };
+    for(var k = 0; k<mealsMeanu.length; k++){
+      if(mealsMeanu[k].MealName == meal.name){
+        let deletedRef = firebase.database().ref('Orders/Table4/Meals/' + mealsMeanu[k].TimeStamp);
+          deletedRef.remove();
+          break;
+     }
+    }
+  /*  for (var i = 0; i < arrayOfOrder.length; i++) {
       if (arrayOfOrder[i] != null) {
         if (arrayOfOrder[i].name == meal.name) {
-          let deletedRef = firebase.database().ref('Orders/Table4/Meals/' + arrayOfOrder[i].id);
+          let deletedRef = firebase.database().ref('Orders/Table4/Meals/' + meal.time);
           deletedRef.remove();
           arrayOfOrder[i] = null;
           break;
         }
       }
-    }
+    }*/
     console.log(arrayOfOrder);
     //setOrderList(meal);
     // writeUserData(meal.name, meal.price, meal.id);
