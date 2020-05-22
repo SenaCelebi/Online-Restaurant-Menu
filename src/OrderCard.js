@@ -1,4 +1,6 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import firebase from "./Config";
+import { dessertList, soapList, mealList } from "./constants";
 import {
   Grid,
   Card,
@@ -10,8 +12,22 @@ import {
   Button,
 } from "@material-ui/core";
 
+const[tempList, setTempList] = useState(mealList);
+const updateToCart = (list) => {
+ // console.log(list);
+  console.log(list);
+//Object.values(orderItem.Meals)
+
+}
+
+
+
+
+
 const OrderCard = ({orderItem}) => {
+
   return (
+
     
       <Card raised>
         <div>
@@ -30,9 +46,11 @@ const OrderCard = ({orderItem}) => {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small" fullWidth>
+            <Button size="small" onClick={() => updateToCart(Object.values(orderItem.Meals))} fullWidth>
               SUBMIT
+            
             </Button>
+            
           </CardActions>
         </div>
       </Card>
