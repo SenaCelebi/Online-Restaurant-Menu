@@ -28,6 +28,7 @@ const KitchenOrdersPage = () => {
   useEffect(() => {   
   firebase.database().ref('Orders').on('value',(snap)=>{
     setOrderMenu(Object.values(snap.val()));
+    console.log(orderMenu)
 })}, [])
 
   const classes = useStyles();

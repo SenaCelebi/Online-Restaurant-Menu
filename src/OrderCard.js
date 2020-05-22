@@ -27,13 +27,12 @@ const updateToCart = (list) => {
       deletedRef.remove();
     }
   }
-  
 }
 
   return (
       <Card raised>
         <div>
-          <CardHeader title={orderItem.key} />
+          <CardHeader title={orderItem.title} />
           <CardMedia
             style={{ height: "60px" }}
             image={"https://www.barazzi.com/img/c/10.jpg"}
@@ -50,7 +49,6 @@ const updateToCart = (list) => {
           <CardActions>
             <Button size="small" onClick={() => updateToCart(Object.values(orderItem.Meals))} fullWidth>
               SUBMIT
-            
             </Button>
             
           </CardActions>

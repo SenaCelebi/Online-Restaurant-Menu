@@ -60,6 +60,11 @@ import firebase from "./Config";
       totalPrice += updatedMenu[i].MealPrice;
     }
 
+    const writeTotalPrice = (total) => {
+      firebase.database().ref('Orders/Table4/TotalPrice').set({
+        total
+      });
+    }
 
   return (
     <div>
@@ -93,7 +98,7 @@ import firebase from "./Config";
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="Big" >Total Price: ${totalPrice}</Button>
+                  <Button size="Big" onClick={() => writeTotalPrice(totalPrice)}>Total Price: ${totalPrice}</Button>
                 </CardActions>
               </Card>
             </Grid>
