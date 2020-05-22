@@ -12,23 +12,25 @@ import {
   Button,
 } from "@material-ui/core";
 
-const[tempList, setTempList] = useState(mealList);
-const updateToCart = (list) => {
- // console.log(list);
-  console.log(list);
-//Object.values(orderItem.Meals)
-
-}
-
-
-
-
 
 const OrderCard = ({orderItem}) => {
 
-  return (
+const[tempList, setTempList] = useState(mealList);
 
-    
+const updateToCart = (list) => {
+  console.log(list);
+  setTempList(list);
+  console.log(tempList);
+  for(var i=0; i<list.length; i++){
+    if(list[i].MealPrice != 0){
+      let deletedRef = firebase.database().ref('Orders/Table4/Meals/' + list[i].TimeStamp);
+      deletedRef.remove();
+    }
+  }
+  
+}
+
+  return (
       <Card raised>
         <div>
           <CardHeader title={orderItem.key} />
