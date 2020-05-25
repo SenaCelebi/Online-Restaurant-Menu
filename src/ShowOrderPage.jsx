@@ -10,9 +10,10 @@ import {
   Button,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { dessertList, soapList, mealList } from "./constants";
 import Collapsible from "./Collapsible";
 import firebase from "./Config";
+import { dessertList, soapList, mealList } from "./constants";
+import CollapsibleForShowOrder from "./CollapsibleForShowOrder"
 
   /*var firebaseheading = firebase.database().ref().child("heading");
   firebaseheading.on('value', function(datasnapshot){
@@ -81,24 +82,31 @@ import firebase from "./Config";
           title="Table 5"
         />
         <CardContent>
-          <CardHeader
+        {/*  <CardHeader
             title={"Orders For Table5"}
             subheader={"Look at your orders. If you want to add or delete meals from your orders you can turn bact to Menu."}
-          ></CardHeader>
+        ></CardHeader> */}
           <Grid container direction="column" spacing={4}>
             <Grid item>
               
             </Grid>
             <Grid item>
               <Card className={classes.root}>
-              <CardHeader title={"Orders"}/>
+            {/*  <CardHeader title={"Orders"}/> */}
                 <CardContent>
-                  <Typography variant="body2" component="p">
+                {/*  <Typography variant="body2" component="p">
                    {updatedMenu.map(updatedMenu => <div>{updatedMenu.MealName + ":            $" + updatedMenu.MealPrice}</div>)}
-                  </Typography>
+                 </Typography> */}
+                  <Grid item>
+                     <CollapsibleForShowOrder
+                      list={updatedMenu}
+                      title={"Order"}
+                      subtitle={"Show Your Orders"}
+                  />
+            </Grid>
                 </CardContent>
                 <CardActions>
-                  <Button size="Big" onClick={() => writeTotalPrice(totalPrice)}>Total Price: ${totalPrice}</Button>
+                  <Button size="Big" color="primary" onClick={() => writeTotalPrice(totalPrice)}>Total Price: ${totalPrice}</Button>
                 </CardActions>
               </Card>
             </Grid>

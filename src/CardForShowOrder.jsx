@@ -124,15 +124,9 @@ const MealCard = (props) => {
           title={MealName}
           subheader={"$" + MealPrice}
         />
-        <CardMedia style={{ height: "170px" }} image={MealImage} />
-        <CardContent>
-          <Typography variant="body2" component="p">
-            {MealDesc}
-          </Typography>
-        </CardContent>
+
         <CardActions>
-        <Button id="hello"  color="primary" size="small" onClick={addToCart} >ADD</Button>
-       {/* <Button id="delete" size="small" onClick={deleteToCart}>DELETE</Button> */}
+        <Button id="delete" size="small" color="secondary" onClick={deleteToCart}>DELETE</Button>
         {/* {buttons.map(button => <Button size="small">{button.title}</Button>)}  */}
         </CardActions>
       </div>

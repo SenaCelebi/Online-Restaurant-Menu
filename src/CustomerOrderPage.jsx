@@ -98,8 +98,8 @@ import { Link } from "react-router-dom";
         />
         <CardContent>
           <CardHeader
-            title={"" + tit}
-            subheader={"Create your order for table 5"}
+            title={"Table 4"}
+            subheader={"Create your order for table 4"}
           ></CardHeader>
           <Grid container direction="column" spacing={4}>
             <Grid item>
