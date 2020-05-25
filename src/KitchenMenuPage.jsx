@@ -130,7 +130,7 @@ const KitchenMenuPage = () => {
                   subtitle={"Select a dessert"}
                 />
               </Grid>
-              <Button size="Big" component={Link} to={'/showOrders'}>THE ORDERS</Button>
+
             </Grid>
           </CardContent>
         </Card>
