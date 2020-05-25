@@ -5,6 +5,7 @@ import {
   CardMedia,
   CardContent,
   CardHeader,
+  Button,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { mealList, soapList, dessertList } from "./constants";
@@ -12,6 +13,9 @@ import KitchenMenuItem from './KitchenMenuItem';
 import firebase from "./Config";
 
 import { CartProvider } from './CartContext';
+
+import CollapsibleForKitchenMenu from "./CollabsibleForKithchenMenu"
+import { Link } from "react-router-dom";
 
 const KitchenMenuPage = () => {
   const useStyles = makeStyles({
@@ -31,7 +35,18 @@ const KitchenMenuPage = () => {
       fontWeight: "bold",
       padding: 15,
     },
+    root: {
+      minWidth: 275,
+    }
   });
+
+  const styles = (theme) => ({
+    card: {
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.primary.contrastText,
+    },
+  });
+
 
   const classes = useStyles();
 
@@ -75,30 +90,51 @@ const KitchenMenuPage = () => {
       console.log(MealsObject);
     
   return (
-    <div>
-      <CartProvider>
-      <Card style={{ backgroundColor: "#ffffff" }} raised>
-        <CardMedia
-          component="img"
-          alt="Table 5"
-          height="200"
-          image="https://ak5.picdn.net/shutterstock/videos/28204555/thumb/1.jpg"
-          title="Table 5"
-        />
-        <CardHeader
-          title={"Menu"}
-          subheader={"Choose available menu items"}
-        ></CardHeader>
-        <CardContent>
-          <Grid container direction="column" spacing={4}>
-          <KitchenMenuItem list={soapsMenu} title={"Soaps"} subtitle={"Soaps in the Menu"} {...MealsObject}/>
-          <KitchenMenuItem list={mealsMeanu} title={"Meals"} subtitle={"Meals in the Menu"} {...MealsObject} />
-          <KitchenMenuItem list={dessertsMenu} title={"Desserts"} subtitle={"Desserts in the Menu"} {...MealsObject} />
-          </Grid>
-        </CardContent>
-      </Card>
-      </CartProvider>
-    </div>
+      <div>
+        <Card
+          className={styles.card}
+          style={{ backgroundColor: "#f4f4f4" }}
+          raised
+        >
+          <CardMedia
+            component="img"
+            alt="Table 5"
+            height="200"
+            image="https://www.barazzi.com/img/c/10.jpg"
+            title="Table 5"
+          />
+          <CardContent>
+            <CardHeader
+              title={"Table 4"}
+              subheader={"Create your order for table 4"}
+            ></CardHeader>
+            <Grid container direction="column" spacing={4}>
+              <Grid item>
+                <CollapsibleForKitchenMenu
+                  list={soapsMenu}
+                  title={"Soaps"}
+                  subtitle={"Select a soap"}
+                />
+              </Grid>
+              <Grid item>
+                <CollapsibleForKitchenMenu
+                  list={mealsMeanu}
+                  title={"Meals"}
+                  subtitle={"Select a meal"}
+                />
+              </Grid>
+              <Grid item>
+                <CollapsibleForKitchenMenu
+                  list={dessertsMenu}
+                  title={"Desserts"}
+                  subtitle={"Select a dessert"}
+                />
+              </Grid>
+              <Button size="Big" component={Link} to={'/showOrders'}>THE ORDERS</Button>
+            </Grid>
+          </CardContent>
+        </Card>
+      </div>
   );
 };
 

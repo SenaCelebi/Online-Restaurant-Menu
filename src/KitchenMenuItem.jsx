@@ -7,6 +7,7 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import { CartContext } from './CartContext';
+import { CartProvider } from './CartContext';
 
 const KitchenMenuItem = ({ list, title, subtitle }, props) => {
 
@@ -62,6 +63,7 @@ const KitchenMenuItem = ({ list, title, subtitle }, props) => {
         </ExpansionPanelSummary>
         <Divider />
         <ExpansionPanelDetails>
+        <CartProvider>
           <Grid container spacing={2}>
             {list.map((item) => (
               <Grid item xs={12}>
@@ -82,6 +84,7 @@ const KitchenMenuItem = ({ list, title, subtitle }, props) => {
               </Grid>
             ))}
           </Grid>
+        </CartProvider>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </Grid>

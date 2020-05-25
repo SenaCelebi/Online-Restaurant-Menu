@@ -63,7 +63,7 @@ import CollapsibleForShowOrder from "./CollapsibleForShowOrder"
 
     const writeTotalPrice = (total) => {
       firebase.database().ref('Orders/Table4/TotalPrice').set({
-        total
+        TotalPrice: total
       });
     }
 
