@@ -104,10 +104,6 @@ const KitchenMenuPage = () => {
             title="Table 5"
           />
           <CardContent>
-            <CardHeader
-              title={"Table 4"}
-              subheader={"Create your order for table 4"}
-            ></CardHeader>
             <Grid container direction="column" spacing={4}>
               <Grid item>
                 <CollapsibleForKitchenMenu
