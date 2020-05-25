@@ -17,13 +17,13 @@ const OrderCard = ({orderItem}) => {
 
 const[tempList, setTempList] = useState(mealList);
 
-const updateToCart = (list) => {
+const updateToCart = (title, list) => {
   console.log(list);
   setTempList(list);
   console.log(tempList);
   for(var i=0; i<list.length; i++){
     if(list[i].MealPrice != 0){
-      let deletedRef = firebase.database().ref('Orders/Table4/Meals/' + list[i].TimeStamp);
+      let deletedRef = firebase.database().ref('Orders/' + title + '/Meals/' + list[i].TimeStamp);
       deletedRef.remove();
     }
   }
@@ -47,7 +47,7 @@ const updateToCart = (list) => {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small" onClick={() => updateToCart(Object.values(orderItem.Meals))} fullWidth>
+            <Button size="small" onClick={() => updateToCart(orderItem.title, Object.values(orderItem.Meals))} fullWidth>
               SUBMIT
             </Button>
             
