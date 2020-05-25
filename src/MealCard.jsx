@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function writeUserData(MealName, MealPrice, MealId, timestamp) {
+function writeUserData(MealName, MealPrice, MealId, timestamp, MealAvailability) {
   var d = new Date();
   timestamp = d.getTime();
   console.log(timestamp);
@@ -50,7 +50,7 @@ const MealCard = (props) => {
   const [cart, setCart] = useContext(CartContext);
 
   const addToCart = () => {
-    const meal = { name: props.MealName, price: props.MealPrice, id: props.MealId, timestamp:0 };
+    const meal = { name: props.MealName, price: props.MealPrice, id: props.MealId, timestamp:0};
     setOrderList(meal);
     writeUserData(meal.name, meal.price, meal.id, meal.timestamp);
     setCart(currentState => [...currentState, meal]);
@@ -105,7 +105,7 @@ const MealCard = (props) => {
   }
 
   const classes = useStyles();
-  const { MeaLAvailability, MealDesc, MealId, MealImage, MealName, MealPrice , buttons} = props;
+  const { MealAvailability, MealDesc, MealId, MealImage, MealName, MealPrice, MealType , buttons} = props;
 
  /* const but = document.getElementById('hello');
   if(but){
@@ -122,7 +122,7 @@ const MealCard = (props) => {
       <div className={classes.details}>
         <CardHeader
           title={MealName}
-          subheader={"$" + MealPrice}
+          subheader={"$" + MealPrice + "  " + MealAvailability }
         />
         <CardMedia style={{ height: "170px" }} image={MealImage} />
         <CardContent>
