@@ -29,9 +29,27 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function makeAvailableFirebase(MealId) {
-  firebase.database().ref('Menu/').child(MealId).set({
-    MealAvailability: "no"
+function makeAvailableFirebase(MealName, MealType, MealId, MealDesc, MealImage, MealPrice) {
+  firebase.database().ref('Menu/' + MealType).child(MealId).set({
+    MealDesc: MealDesc,
+    MealImage: MealImage,
+    MealName: MealName,
+    MealId: MealId,
+    MealAvailability: "Available",
+    MealType: MealType,
+    MealPrice: MealPrice
+  });
+}
+
+function makeNotAvailableFirebase(MealName, MealType, MealId, MealDesc, MealImage, MealPrice) {
+  firebase.database().ref('Menu/' + MealType).child(MealId).set({
+    MealDesc: MealDesc,
+    MealImage: MealImage,
+    MealName: MealName,
+    MealId: MealId,
+    MealAvailability: "Not Available",
+    MealType: MealType,
+    MealPrice: MealPrice
   });
 }
 
@@ -45,9 +63,18 @@ const MealCard = (props) => {
   const [cart, setCart] = useContext(CartContext);
 
   const makeAvailable = () => {
-    const meal = { name: props.MealName, price: props.MealPrice, id: props.MealId, timestamp:0 };
+    const meal = { name: props.MealName, price: props.MealPrice, id: props.MealId, type: props.MealType , desc: props.MealDesc, image: props.MealImage };
     setOrderList(meal);
-    makeAvailableFirebase(meal.id)
+    makeAvailableFirebase(meal.name, meal.type, meal.id, meal.desc, meal.image, meal.price)
+    setCart(currentState => [...currentState, meal]);
+    console.log(meal);
+    
+  }
+
+  const makeNotAvailable = () => {
+    const meal = { name: props.MealName, price: props.MealPrice, id: props.MealId, type: props.MealType , desc: props.MealDesc, image: props.MealImage };
+    setOrderList(meal);
+    makeNotAvailableFirebase(meal.name, meal.type, meal.id, meal.desc, meal.image, meal.price)
     setCart(currentState => [...currentState, meal]);
     console.log(meal);
     
@@ -66,21 +93,9 @@ const MealCard = (props) => {
         console.log(mealsMeanu);
     })}, [])
 
-  const deleteToCart = () => {
-    console.log(mealsMeanu);
-    const meal = { name: props.MealName, price: props.MealPrice, id: props.MealId, time: props.TimeStamp };
-    for(var k = 0; k<mealsMeanu.length; k++){
-      if(mealsMeanu[k].MealName == meal.name){
-        let deletedRef = firebase.database().ref('Orders/Table4/Meals/' + mealsMeanu[k].TimeStamp);
-          deletedRef.remove();
-          break;
-     }
-    }
-    console.log(arrayOfOrder);
-  }
 
   const classes = useStyles();
-  const { MealAvailability, MealDesc, MealId, MealImage, MealName, MealPrice , buttons} = props;
+  const { MealAvailability, MealDesc, MealId, MealImage, MealName, MealPrice , MealType, buttons } = props;
 
   
   return (
@@ -88,11 +103,11 @@ const MealCard = (props) => {
       <div className={classes.details}>
         <CardHeader
           title={MealName}
-          subheader={"Is Available:  " + MealAvailability}
+          subheader={MealAvailability}
         />
         <CardActions>
         <Button id="hello"  color="primary" size="small" onClick={makeAvailable} >Available</Button>
-        <Button id="delete" color="primary" size="small" onClick={deleteToCart}>Not</Button>
+        <Button id="delete" color="primary" size="small" onClick={makeNotAvailable}>Not</Button>
         {/* {buttons.map(button => <Button size="small">{button.title}</Button>)}  */}
         </CardActions>
       </div>
