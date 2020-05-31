@@ -52,12 +52,12 @@ import CollapsibleForShowOrder from "./CollapsibleForShowOrder"
 
     var updatedMenu = [];
     for(var i=0; i<mealsMeanu.length; i++){
-      if(mealsMeanu[i].MealPrice != 0){
+      if(mealsMeanu[i].MealPrice !== 0){
         updatedMenu.push(mealsMeanu[i]);
       }
     } 
 
-    for(var i=0; i<updatedMenu.length; i++){
+    for( i=0; i<updatedMenu.length; i++){
       totalPrice += updatedMenu[i].MealPrice;
     }
 

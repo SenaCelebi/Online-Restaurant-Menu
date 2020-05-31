@@ -32,7 +32,7 @@ export default function Digo() {
 
 
   function addMealorTable() {
-    if (values.mname != '' || values.tname != '' || values.status != '') {
+    if (values.mname !== '' || values.tname !== '' || values.status !== '') {
       const db = firebase.database();
       const MenuRef = db.ref().child('Menu')
       const OrderRef = db.ref().child('Orders').child(values.tname);
@@ -40,7 +40,7 @@ export default function Digo() {
       MenuRef.on('value', snap => {
         snap.forEach(childSnapshot => {
           childSnapshot.forEach(childSnapshot => {
-            if (values.mname == childSnapshot.key || values.mname == childSnapshot.val().MealName) {
+            if (values.mname === childSnapshot.key || values.mname === childSnapshot.val().MealName) {
               const time = Date.now()
               OrderRef.child('Meals').child(time).set({
                 MealName: childSnapshot.val().MealName,

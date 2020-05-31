@@ -134,7 +134,7 @@ class xTables extends Component {
       <Fragment className={classes.extra}>
         <Grid container direction="row" spacing={1}>
           {temp.map((i, index) => {
-            if (i != null && i.MealPrice != 0) {
+            if (i != null && i.MealPrice !== 0) {
               return (
                 <Grid item>
                   <Card className={classes.paper}>

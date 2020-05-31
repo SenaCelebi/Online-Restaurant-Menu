@@ -106,8 +106,11 @@ const MealCard = (props) => {
           subheader={MealAvailability}
         />
         <CardActions>
-        <Button id="hello"  color="primary" size="small" onClick={makeAvailable} >Available</Button>
-        <Button id="delete" color="primary" size="small" onClick={makeNotAvailable}>Not</Button>
+          {MealAvailability === "Not Available" ?(
+   <Button id="hello"  color="primary" size="small" onClick={makeAvailable} >Available</Button>
+          ) :(<Button id="delete" color="primary" size="small" onClick={makeNotAvailable}>Not</Button>) }
+     
+        
         {/* {buttons.map(button => <Button size="small">{button.title}</Button>)}  */}
         </CardActions>
       </div>

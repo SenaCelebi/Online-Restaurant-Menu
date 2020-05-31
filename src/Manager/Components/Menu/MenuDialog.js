@@ -52,7 +52,7 @@ export default function MenuDialog() {
     function addMeal(cat, id, name, ava, desc, price, image) {
         const db = firebase.database();
         const MenuRef = db.ref().child('Menu')
-        if (cat != '' || id != '' || name!='' || ava!='' || desc!='' || price!='' || image!='') {
+        if (cat !== '' || id !== '' || name!=='' || ava!=='' || desc!=='' || price!=='' || image!=='') {
                 MenuRef.child(cat).child(id).update({
                     MealName: name,
                     MealId: id,
