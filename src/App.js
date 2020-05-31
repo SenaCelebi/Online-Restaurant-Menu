@@ -8,6 +8,7 @@ import { Route, Switch } from 'react-router-dom'
 import KitchenOrdersPage from "./KitchenOrdersPage";
 import KitchenMenuPage from "./KitchenMenuPage";
 import ShowOrderPage from "./ShowOrderPage";
+import Manager from "./Manager/Manager"
 import firebase from "./Config";
 
 const App = () => {
@@ -35,6 +36,7 @@ const App = () => {
               <Route exact path="/kitchen/orders" component={KitchenOrdersPage} />
               <Route exact path="/kitchen/menu" component={KitchenMenuPage} />
               <Route exact path="/showOrders" component={ShowOrderPage} />
+              <Route exact path="/manager" component={Manager}></Route>
             </Switch>
           </Grid>
           <Grid item xs={false} sm={2} />
