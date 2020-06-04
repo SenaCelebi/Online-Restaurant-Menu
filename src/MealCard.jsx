@@ -46,6 +46,8 @@ const arrayOfOrder = [];
 const arrayOfTimestamp = [];
 const MealCard = (props) => {
 
+  const [showAddAlert, setShowAddAlert] = useState(false);
+
   const [orderList, setOrderList] = useState(null);
 
   const [cart, setCart] = useContext(CartContext);
@@ -56,6 +58,7 @@ const MealCard = (props) => {
     writeUserData(meal.name, meal.price, meal.id, meal.timestamp);
     setCart(currentState => [...currentState, meal]);
     console.log(meal);
+    setShowAddAlert(true);
     
   }
 
@@ -125,7 +128,8 @@ const MealCard = (props) => {
           title={MealName}
           subheader={"$" + MealPrice + "  " + MealAvailability }
         />
-        <Alert severity="success">This is a success alert — check it out!</Alert>
+        { showAddAlert == true ?
+        <Alert severity="success">This is a success alert — check it out!</Alert> : "" }
         <CardMedia style={{ height: "170px" }} image={MealImage} />
         <CardContent>
           <Typography variant="body2" component="p">
