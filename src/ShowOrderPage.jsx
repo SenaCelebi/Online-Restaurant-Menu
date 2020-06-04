@@ -21,7 +21,23 @@ import CollapsibleForShowOrder from "./CollapsibleForShowOrder"
     console.log(tit);
   });*/
 
-  const ShowOrderPage = () => {
+
+
+
+  const ShowOrderPage = ({location}) => {
+
+    console.log(location);
+
+    const [url, setUrl] = useState('');
+
+    useEffect(() =>{
+      const params = new URLSearchParams(location.search);
+      const q = params.get('q');
+      console.log(q);
+      setUrl(q);
+      console.log(url);
+    }, []);
+
 
   const styles = (theme) => ({
     card: {
