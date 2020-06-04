@@ -47,9 +47,8 @@ const arrayOfTimestamp = [];
 
 const MealCard = (props) => {
 
- // console.log(props.table);
 
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState('Table4');
 
   useEffect(() =>{
      setUrl(props.table);
@@ -76,49 +75,27 @@ const MealCard = (props) => {
   }
 
   arrayOfOrder.push(orderList);
- // console.log(orderList);
- // console.log(arrayOfOrder);
-  
-
-  /*for (var i = 0; i < arrayOfOrder.length; i++) {
-    if(arrayOfOrder[i] != null){
-      writeUserData(arrayOfOrder[i].name, arrayOfOrder[i].price, arrayOfOrder[i].id, 0);
-    }
-  }*/
 
   const[mealsMeanu, setMealsMeanu] = useState(mealList);
  
     useEffect(() => {   
-      firebase.database().ref('Orders/Table4/Meals').on('value',(snap)=>{
+      firebase.database().ref('Orders/'+url+'/Meals').on('value',(snap)=>{
         setMealsMeanu(Object.values(snap.val()));
-       
-    })}, [])
+        
+    })}, url)
 
   const deleteToCart = () => {
    
-    const meal = { name: props.MealName, price: props.MealPrice, id: props.MealId, time: props.TimeStamp };
+    const meal = { name: props.MealName, price: props.MealPrice, id: props.MealId, time: props.TimeStamp, table: props.table };
+    console.log(mealsMeanu);
+    console.log(meal.table);
     for(var k = 0; k<mealsMeanu.length; k++){
       if(mealsMeanu[k].MealName === meal.name){
-        let deletedRef = firebase.database().ref('Orders/Table4/Meals/' + mealsMeanu[k].TimeStamp);
+        let deletedRef = firebase.database().ref('Orders/'+meal.table+'/Meals/' + mealsMeanu[k].TimeStamp);
           deletedRef.remove();
           break;
      }
     }
-  /*  for (var i = 0; i < arrayOfOrder.length; i++) {
-      if (arrayOfOrder[i] != null) {
-        if (arrayOfOrder[i].name == meal.name) {
-          let deletedRef = firebase.database().ref('Orders/Table4/Meals/' + meal.time);
-          deletedRef.remove();
-          arrayOfOrder[i] = null;
-          break;
-        }
-      }
-    }*/
-  
-    //setOrderList(meal);
-    // writeUserData(meal.name, meal.price, meal.id);
-    // setCart(currentState => [...currentState, meal]);
-    //console.log(meal);
   }
 
   const classes = useStyles();

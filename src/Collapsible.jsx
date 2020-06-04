@@ -50,7 +50,7 @@ const Collapsible = ({ title, subtitle, list, isManager, table }) => {
 
   return (
     
-    <ExpansionPanel defaultExpanded>
+    <ExpansionPanel >
       <ExpansionPanelSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1c-content"
