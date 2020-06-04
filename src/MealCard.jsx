@@ -56,6 +56,7 @@ const MealCard = (props) => {
   }, []); 
 
   const [showAddAlert, setShowAddAlert] = useState(false);
+  const [showDeleteAlert, setShowDeleteAlert] = useState(false);
 
   const [orderList, setOrderList] = useState(null);
 
@@ -93,6 +94,7 @@ const MealCard = (props) => {
       if(mealsMeanu[k].MealName === meal.name){
         let deletedRef = firebase.database().ref('Orders/'+meal.table+'/Meals/' + mealsMeanu[k].TimeStamp);
           deletedRef.remove();
+          setShowDeleteAlert(true);
           break;
      }
     }
@@ -110,6 +112,8 @@ const MealCard = (props) => {
         />
         { showAddAlert === true ?         
         <Alert severity="success" onClose={() => {setShowAddAlert(false)}}>Meal Added to Orders</Alert>: "" }
+        { showDeleteAlert === true ?         
+        <Alert severity="error" onClose={() => {setShowDeleteAlert(false)}}>Meal Deleted from Orders</Alert>: "" }
         <CardMedia style={{ height: "170px" }} image={MealImage} />
         <CardContent>
           <Typography variant="body2" component="p">
