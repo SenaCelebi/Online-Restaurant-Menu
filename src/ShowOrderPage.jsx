@@ -15,11 +15,7 @@ import firebase from "./Config";
 import { dessertList, soapList, mealList } from "./constants";
 import CollapsibleForShowOrder from "./CollapsibleForShowOrder"
 
-  /*var firebaseheading = firebase.database().ref().child("heading");
-  firebaseheading.on('value', function(datasnapshot){
-    var xx = datasnapshot;
-    console.log(tit);
-  });*/
+
 
 
 
@@ -63,7 +59,7 @@ import CollapsibleForShowOrder from "./CollapsibleForShowOrder"
     useEffect(() => {   
       firebase.database().ref('Orders/Table4/Meals').on('value',(snap)=>{
       setMealsMeanu(Object.values(snap.val()));
-      console.log(mealsMeanu);
+      
     })}, [])
 
     var updatedMenu = [];

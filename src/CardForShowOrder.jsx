@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 function writeUserData(MealName, MealPrice, MealId, timestamp) {
   var d = new Date();
   timestamp = d.getTime();
-  console.log(timestamp);
+  
   firebase.database().ref('Orders/Table4/Meals/' + timestamp).set({
     MealName: MealName,
     MealPrice: MealPrice,
@@ -54,31 +54,26 @@ const MealCard = (props) => {
     setOrderList(meal);
     writeUserData(meal.name, meal.price, meal.id, meal.timestamp);
     setCart(currentState => [...currentState, meal]);
-    console.log(meal);
+   
     
   }
 
   arrayOfOrder.push(orderList);
-  console.log(orderList);
-  console.log(arrayOfOrder);
+ 
   
 
-  /*for (var i = 0; i < arrayOfOrder.length; i++) {
-    if(arrayOfOrder[i] != null){
-      writeUserData(arrayOfOrder[i].name, arrayOfOrder[i].price, arrayOfOrder[i].id, 0);
-    }
-  }*/
+
 
   const[mealsMeanu, setMealsMeanu] = useState(mealList);
  
     useEffect(() => {   
       firebase.database().ref('Orders/Table4/Meals').on('value',(snap)=>{
         setMealsMeanu(Object.values(snap.val()));
-        console.log(mealsMeanu);
+        
     })}, [])
 
   const deleteToCart = () => {
-    console.log(mealsMeanu);
+    
     const meal = { name: props.MealName, price: props.MealPrice, id: props.MealId, time: props.TimeStamp };
     for(var k = 0; k<mealsMeanu.length; k++){
       if(mealsMeanu[k].MealName == meal.name){
@@ -87,35 +82,14 @@ const MealCard = (props) => {
           break;
      }
     }
-  /*  for (var i = 0; i < arrayOfOrder.length; i++) {
-      if (arrayOfOrder[i] != null) {
-        if (arrayOfOrder[i].name == meal.name) {
-          let deletedRef = firebase.database().ref('Orders/Table4/Meals/' + meal.time);
-          deletedRef.remove();
-          arrayOfOrder[i] = null;
-          break;
-        }
-      }
-    }*/
-    console.log(arrayOfOrder);
-    //setOrderList(meal);
-    // writeUserData(meal.name, meal.price, meal.id);
-    // setCart(currentState => [...currentState, meal]);
-    //console.log(meal);
+ 
+  
   }
 
   const classes = useStyles();
   const { MeaLAvailability, MealDesc, MealId, MealImage, MealName, MealPrice , buttons} = props;
 
- /* const but = document.getElementById('hello');
-  if(but){
-  but.addEventListener('click', (e) => {
-    e.preventDefault();
-    ref.set({
-      MealName: props.MealName,
-      MealPrice: MealPrice
-    });
-  });}*/
+
   
   return (
     <Card className={classes.root} raised>

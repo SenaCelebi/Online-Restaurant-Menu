@@ -37,7 +37,7 @@ const Collapsible = ({ title, subtitle, list, isManager }) => {
     ? [{ title: "EDIT" }, { title: "DELETE" }]
     : [{ title: "ADD" }, { title: "INGREDIENTS" }];
   const getMenuItem = (menuObj) => {
-    console.log(menuObj); 
+   
     return (
       <Grid item xs={12} sm={6}>
         <CartProvider>
