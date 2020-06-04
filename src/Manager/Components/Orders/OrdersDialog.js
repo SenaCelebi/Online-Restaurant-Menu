@@ -32,7 +32,7 @@ export default function Digo() {
 
 
   function addMealorTable() {
-    if (values.mname != '' || values.tname != '' || values.status != '') {
+    if (values.tname.trim() != '') {
       const db = firebase.database();
       const MenuRef = db.ref().child('Menu')
       const OrderRef = db.ref().child('Orders').child(values.tname);
@@ -56,8 +56,8 @@ export default function Digo() {
           TimeStamp: ""
         })
         OrderRef.update({
-          StatusOfOrder: values.status,
-          title: values.tname
+          StatusOfOrder: values.status.trim(),
+          title: values.tname.trim()
         })
       })
       setOpen(false)
@@ -94,7 +94,6 @@ export default function Digo() {
             error={error}
             margin="dense"
             fullWidth
-            required
             label="Meal ID/Name"
             onChange={onhandleChange('mname')}
           />
@@ -102,8 +101,7 @@ export default function Digo() {
             error={error}
             margin="dense"
             fullWidth
-            required
-            label="Status of the Order"
+            label="Status of the Table"
             onChange={onhandleChange('status')}
           />
         </DialogContent>
