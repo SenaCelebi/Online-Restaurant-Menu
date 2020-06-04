@@ -21,7 +21,20 @@ import { Link } from "react-router-dom";
     console.log(tit);
   });*/
 
-  const CustomerOrderPage = () => {
+  const CustomerOrderPage = ({location}) => {
+
+    console.log(location);
+
+    const [url, setUrl] = useState('');
+
+    useEffect(() =>{
+      const params = new URLSearchParams(location.search);
+      const q = params.get('q');
+      console.log(q);
+      setUrl(q);
+      console.log(url);
+    }, []);
+
 
   const styles = (theme) => ({
     card: {
@@ -46,8 +59,8 @@ import { Link } from "react-router-dom";
   useEffect(() => {   
     firebase.database().ref('heading').on('value',(snap)=>{
     setTit(snap.val());
-    console.log(tit);
-    console.log(snap.val()); 
+   // console.log(tit);
+   // console.log(snap.val()); 
   })}, [])
 
   //Retrieving Soaps
@@ -104,6 +117,7 @@ import { Link } from "react-router-dom";
           <Grid container direction="column" spacing={4}>
             <Grid item>
               <Collapsible
+                table={url}
                 list={soapsMenu}
                 title={"Soaps"}
                 subtitle={"Select a soap"}

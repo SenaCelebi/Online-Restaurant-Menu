@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MealCard from "./MealCard";
 import {
@@ -19,8 +19,7 @@ import { CartProvider } from './CartContext';
 
 import firebase from "./Config"
 
-
-const Collapsible = ({ title, subtitle, list, isManager }) => {
+const Collapsible = ({ title, subtitle, list, isManager, table }) => {
   const useStyles = makeStyles((theme) => ({
     column: {
       flexBasis: "33.33%",
@@ -30,18 +29,18 @@ const Collapsible = ({ title, subtitle, list, isManager }) => {
       fontWeight: "bold",
     },
   }));
-
+ 
 
   const buttons = isManager
     ? [{ title: "EDIT" }, { title: "DELETE" }]
     : [{ title: "ADD" }, { title: "INGREDIENTS" }];
   const getMenuItem = (menuObj) => {
-    console.log(menuObj);
+  
     if(menuObj.MealAvailability == "Available"){ 
     return (
       <Grid item xs={12} sm={6}>
         <CartProvider>
-        <MealCard buttons={buttons}  {...menuObj} 
+        <MealCard buttons={buttons} table={table} {...menuObj} 
         key={menuObj.MealId}/>
         </CartProvider>
       </Grid>
