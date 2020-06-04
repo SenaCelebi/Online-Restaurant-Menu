@@ -125,6 +125,7 @@ import { Link } from "react-router-dom";
             </Grid>
             <Grid item>
               <Collapsible
+                table={url}
                 list={mealsMeanu}
                 title={"Meals"}
                 subtitle={"Select a meal"}
@@ -132,6 +133,7 @@ import { Link } from "react-router-dom";
             </Grid>
             <Grid item>
               <Collapsible
+                table={url}
                 list={dessertsMenu}
                 title={"Desserts"}
                 subtitle={"Select a dessert"}
