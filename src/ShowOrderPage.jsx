@@ -16,15 +16,11 @@ import { dessertList, soapList, mealList } from "./constants";
 import CollapsibleForShowOrder from "./CollapsibleForShowOrder"
 
 
-
-
-
-
   const ShowOrderPage = ({location}) => {
 
     console.log(location);
 
-    const [url, setUrl] = useState('');
+    const [url, setUrl] = useState('Table4');
 
     useEffect(() =>{
       const params = new URLSearchParams(location.search);
@@ -57,10 +53,10 @@ import CollapsibleForShowOrder from "./CollapsibleForShowOrder"
     var totalPrice = 0;
 
     useEffect(() => {   
-      firebase.database().ref('Orders/Table4/Meals').on('value',(snap)=>{
+      firebase.database().ref('Orders/'+url+'/Meals').on('value',(snap)=>{
       setMealsMeanu(Object.values(snap.val()));
       
-    })}, [])
+    })}, url)
 
     var updatedMenu = [];
     for(var i=0; i<mealsMeanu.length; i++){
@@ -74,7 +70,7 @@ import CollapsibleForShowOrder from "./CollapsibleForShowOrder"
     }
 
     const writeTotalPrice = (total) => {
-      firebase.database().ref('Orders/Table4/TotalPrice').set({
+      firebase.database().ref('Orders/'+url+'/TotalPrice').set({
         TotalPrice: total
       });
     }

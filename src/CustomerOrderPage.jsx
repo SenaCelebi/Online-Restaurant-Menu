@@ -139,7 +139,7 @@ import { Link } from "react-router-dom";
                 subtitle={"Select a dessert"}
               />
             </Grid>
-            <Button size="Big" component={Link} to={'/showOrders'}>THE ORDERS</Button>
+            <Button size="Big" component={Link} to={'/showOrders/?q='+url}>THE ORDERS</Button>
           </Grid>
         </CardContent>
       </Card>
