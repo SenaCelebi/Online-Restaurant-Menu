@@ -22,7 +22,7 @@ const updateToCart = (title, list) => {
   setTempList(list);
   console.log(tempList);
   for(var i=0; i<list.length; i++){
-    if(list[i].MealPrice != 0){
+    if(list[i].MealPrice !== 0){
       let deletedRef = firebase.database().ref('Orders/' + title + '/Meals/' + list[i].TimeStamp);
       deletedRef.remove();
     }

@@ -132,7 +132,7 @@ function Delete(itemName) {
       snap.forEach(childSnapshot => {
         const cat = childSnapshot.key
         childSnapshot.forEach(childSnapshot => {
-          if (itemName == childSnapshot.val().MealName) {
+          if (itemName === childSnapshot.val().MealName) {
             ref.child(cat).child(childSnapshot.key).remove()
           }
         })

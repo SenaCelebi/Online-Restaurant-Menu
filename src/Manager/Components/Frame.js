@@ -92,8 +92,8 @@ export default function MainAppBar() {
     const db = firebase.database();
     const UserInfo = db.ref().child('UserInfo')
     UserInfo.on('value', snap => {
-      if (values.oldKitchen != '' || values.kitchenPassword != '') {
-        if (values.oldKitchen == snap.val().KitchenCode) {
+      if (values.oldKitchen !== '' || values.kitchenPassword !== '') {
+        if (values.oldKitchen === snap.val().KitchenCode) {
           UserInfo.update({ KitchenCode: values.kitchenPassword })
           setKOpen(false)
           setValues({showPassword:false})
@@ -111,8 +111,8 @@ export default function MainAppBar() {
     const db = firebase.database();
     const UserInfo = db.ref().child('UserInfo')
     UserInfo.on('value', snap => {
-      if (values.oldManager != '' || values.managerPassword != '') {
-        if (values.oldManager == snap.val().ManagerCode) {
+      if (values.oldManager !== '' || values.managerPassword !== '') {
+        if (values.oldManager === snap.val().ManagerCode) {
           UserInfo.update({ ManagerCode: values.managerPassword })
           setOpen(false)
           setError(false)

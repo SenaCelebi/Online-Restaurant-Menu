@@ -81,7 +81,7 @@ const MealCard = (props) => {
     console.log(mealsMeanu);
     const meal = { name: props.MealName, price: props.MealPrice, id: props.MealId, time: props.TimeStamp };
     for(var k = 0; k<mealsMeanu.length; k++){
-      if(mealsMeanu[k].MealName == meal.name){
+      if(mealsMeanu[k].MealName === meal.name){
         let deletedRef = firebase.database().ref('Orders/Table4/Meals/' + mealsMeanu[k].TimeStamp);
           deletedRef.remove();
           break;
@@ -132,7 +132,7 @@ const MealCard = (props) => {
         </CardContent>
         <CardActions>
         <Button id="hello"  color="primary" size="small" onClick={addToCart} >ADD</Button>
-       {/* <Button id="delete" size="small" onClick={deleteToCart}>DELETE</Button> */}
+       <Button id="delete" size="small" onClick={deleteToCart}>DELETE</Button> 
         {/* {buttons.map(button => <Button size="small">{button.title}</Button>)}  */}
         </CardActions>
       </div>
