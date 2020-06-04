@@ -36,7 +36,8 @@ const Collapsible = ({ title, subtitle, list, isManager }) => {
     ? [{ title: "EDIT" }, { title: "DELETE" }]
     : [{ title: "ADD" }, { title: "INGREDIENTS" }];
   const getMenuItem = (menuObj) => {
-    console.log(menuObj); 
+    console.log(menuObj);
+    if(menuObj.MealAvailability == "Available"){ 
     return (
       <Grid item xs={12} sm={6}>
         <CartProvider>
@@ -44,7 +45,7 @@ const Collapsible = ({ title, subtitle, list, isManager }) => {
         key={menuObj.MealId}/>
         </CartProvider>
       </Grid>
-    );
+    ); }
   };
   const classes = useStyles();
 
@@ -85,4 +86,3 @@ const Collapsible = ({ title, subtitle, list, isManager }) => {
 };
 
 export default Collapsible;
-

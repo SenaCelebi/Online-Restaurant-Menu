@@ -7,6 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import Alert from '@material-ui/lab/Alert';
 import { dessertList, soapList, mealList } from "./constants";
 
 import firebase from "./Config";
@@ -124,6 +125,7 @@ const MealCard = (props) => {
           title={MealName}
           subheader={"$" + MealPrice + "  " + MealAvailability }
         />
+        <Alert severity="success">This is a success alert — check it out!</Alert>
         <CardMedia style={{ height: "170px" }} image={MealImage} />
         <CardContent>
           <Typography variant="body2" component="p">
@@ -131,7 +133,7 @@ const MealCard = (props) => {
           </Typography>
         </CardContent>
         <CardActions>
-        <Button id="hello"  color="primary" size="small" onClick={addToCart} >ADD</Button>
+        <Button id="hello"  color="primary" size="small" onClick={addToCart}>ADD</Button>
        <Button id="delete" size="small" onClick={deleteToCart}>DELETE</Button> 
         {/* {buttons.map(button => <Button size="small">{button.title}</Button>)}  */}
         </CardActions>

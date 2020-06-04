@@ -3,18 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.9.5",
+    "@material-ui/core": "^4.10.1",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.55",
     "@material-ui/styles": "^4.9.0",
     "@mui-treasury/components": "^1.0.1",
     "@mui-treasury/styles": "^1.1.0",
     "@mui-treasury/styling": "^0.2.8",
     "firebase": "^7.14.4",
+    "prop-types": "^15.6.2",
     "react": "^16.13.0",
+    "react-alert": "^7.0.1",
+    "react-alert-template-basic": "^1.0.0",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
-    "react-swipeable-views": "^0.13.9"
+    "react-swipeable-views": "^0.13.9",
+    "react-transition-group": "^2.9.0"
   },
   "scripts": {
     "start": "react-scripts start",
