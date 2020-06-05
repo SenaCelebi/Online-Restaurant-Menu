@@ -5,7 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
-import { FormControl, InputLabel, Input, Menu, Dialog, DialogTitle, DialogContent, DialogActions, InputAdornment, Button } from '@material-ui/core';
+import { FormControl, InputLabel, Input, Menu, Dialog, DialogTitle, DialogContent, DialogActions, InputAdornment, Button, Grid } from '@material-ui/core';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -48,12 +48,15 @@ export default function MainAppBar() {
   const [open, setOpen] = React.useState(false)
   const [Kopen, setKOpen] = React.useState(false)
   const [error, setError] = React.useState(false)
+  const [cError, setcError] = React.useState(false)
   const [values, setValues] = React.useState({
     oldManager: '',
     managerPassword: '',
     oldKitchen: '',
     kitchenPassword: '',
-    showPassword: false
+    showPassword: false,
+    confirmK: '',
+    confirmC: ''
   })
 
   const handleProfileMenuOpen = (event) => {
@@ -64,6 +67,7 @@ export default function MainAppBar() {
   }
   const handleClose = (event) => {
     setError(false)
+    setcError(false)
     setOpen(false);
   }
   const handleKOpen = (event) => {
@@ -77,6 +81,7 @@ export default function MainAppBar() {
 
   const onhandleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value })
+
   }
 
   const handleClickShowPassword = () => {
@@ -94,13 +99,19 @@ export default function MainAppBar() {
     UserInfo.on('value', snap => {
       if (values.oldKitchen !== '' || values.kitchenPassword !== '') {
         if (values.oldKitchen === snap.val().KitchenCode) {
-          UserInfo.update({ KitchenCode: values.kitchenPassword })
-          setKOpen(false)
-          setValues({showPassword:false})
+          if (values.kitchenPassword === values.confirmK) {
+            UserInfo.update({ KitchenCode: values.kitchenPassword })
+            setKOpen(false)
+            setError(false)
+            setcError(false)
+            setValues({ showPassword: false })
+          } else {
+            setcError(true)
+          }
         } else {
           setError(true)
         }
-      }else{
+      } else {
         setError(true)
       }
     })
@@ -113,14 +124,19 @@ export default function MainAppBar() {
     UserInfo.on('value', snap => {
       if (values.oldManager !== '' || values.managerPassword !== '') {
         if (values.oldManager === snap.val().ManagerCode) {
-          UserInfo.update({ ManagerCode: values.managerPassword })
-          setOpen(false)
-          setError(false)
-          setValues({showPassword : false})
+          if (values.managerPassword === values.confirmC) {
+            UserInfo.update({ ManagerCode: values.managerPassword })
+            setOpen(false)
+            setError(false)
+            setcError(false)
+            setValues({ showPassword: false })
+          } else {
+            setcError(true)
+          }
         } else {
           setError(true)
         }
-      }else{
+      } else {
         setError(true)
       }
     })
@@ -132,49 +148,72 @@ export default function MainAppBar() {
     <Dialog open={open}>
       <DialogTitle> Change Manager Password</DialogTitle>
       <DialogContent>
-        <FormControl margin='normal'>
-          <InputLabel>Old Password</InputLabel>
-          <Input
-            error={error}
-            type={values.showPassword ? 'text' : 'password'}
-            fullWidth
-            required
-            value= {values.oldManager}
-            label="Old Manager Password"
-            onChange={onhandleChange('oldManager')}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  onClick={handleClickShowPassword}
-                >
-                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
-        </FormControl>
-      </DialogContent>
-      <DialogContent>
-        <FormControl>
-          <InputLabel>New Password</InputLabel>
-          <Input
-            type={values.showPassword ? 'text' : 'password'}
-            fullWidth
-            required
-            label="New Manager Password"
-            onChange={onhandleChange('managerPassword')}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                >
-                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
-        </FormControl>
+        <Grid direction="vertical">
+          <Grid item>
+            <FormControl margin='normal'>
+              <InputLabel>Old Password</InputLabel>
+              <Input
+                error={error}
+                type={values.showPassword ? 'text' : 'password'}
+                fullWidth
+                required
+                onChange={onhandleChange('oldManager')}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={handleClickShowPassword}
+                    >
+                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+          </Grid>
+          <Grid item>
+            <FormControl>
+              <InputLabel>New Password</InputLabel>
+              <Input
+                type={values.showPassword ? 'text' : 'password'}
+                fullWidth
+                required
+                onChange={onhandleChange('managerPassword')}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+          </Grid>
+          <Grid item>
+            <FormControl>
+              <InputLabel>Confirm New Password</InputLabel>
+              <Input
+                error={cError}
+                type={values.showPassword ? 'text' : 'password'}
+                fullWidth
+                required
+                onChange={onhandleChange('confirmC')}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+          </Grid>
+        </Grid>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>
@@ -191,49 +230,74 @@ export default function MainAppBar() {
     <Dialog open={Kopen}>
       <DialogTitle> Change Kitchen Password</DialogTitle>
       <DialogContent>
-        <FormControl margin='normal'>
-          <InputLabel htmlFor="standard-adornment-password">Old Password</InputLabel>
-          <Input
-            error={error}
-            type={values.showPassword ? 'text' : 'password'}
-            fullWidth
-            required
-            label="Old Kitchen Password"
-            onChange={onhandleChange('oldKitchen')}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  onClick={handleClickShowPassword}
-                >
-                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
-        </FormControl>
-      </DialogContent>
-      <DialogContent>
-        <FormControl>
-          <InputLabel htmlFor="standard-adornment-password">New Password</InputLabel>
-          <Input
-            type={values.showPassword ? 'text' : 'password'}
-            fullWidth
-            required
-            label="New Kitchen Password"
-            onChange={onhandleChange('kitchenPassword')}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                >
-                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
-        </FormControl>
+        <Grid direction="vertical">
+          <Grid item>
+            <FormControl fullwidth>
+              <InputLabel>Old Password</InputLabel>
+              <Input
+                error={error}
+                type={values.showPassword ? 'text' : 'password'}
+                fullWidth
+                required
+                onChange={onhandleChange('oldKitchen')}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={handleClickShowPassword}
+                    >
+                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+          </Grid>
+          <Grid item>
+            <FormControl>
+              <InputLabel>New Password</InputLabel>
+              <Input
+                type={values.showPassword ? 'text' : 'password'}
+                fullWidth
+                required
+                onChange={onhandleChange('kitchenPassword')}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+            <Grid item>
+              <FormControl>
+                <InputLabel>Confirm New Password</InputLabel>
+                <Input
+                  type={values.showPassword ? 'text' : 'password'}
+                  fullWidth
+                  required
+                  error={cError}
+                  onChange={onhandleChange('confirmK')}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
+            </Grid>
+          </Grid>
+        </Grid>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleKClose}>

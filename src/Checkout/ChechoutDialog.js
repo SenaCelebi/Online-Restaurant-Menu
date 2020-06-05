@@ -2,7 +2,7 @@ import React from 'react';
 import { StateProvider } from './StateContext';
 import Main from "./Main"
 
-const App = () => 
+const CheckoutDialog = () => 
     <StateProvider>
       <div>
         <Main />
