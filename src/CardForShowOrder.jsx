@@ -41,43 +41,40 @@ function writeUserData(MealName, MealPrice, MealId, timestamp) {
 }
 
 
+
 const arrayOfOrder = [];
 const arrayOfTimestamp = [];
 const MealCard = (props) => {
+
+  const [url, setUrl] = useState('Table4');
+
+  useEffect(() =>{
+     setUrl(props.table);
+     console.log(url);
+  }, url); 
 
   const [orderList, setOrderList] = useState(null);
 
   const [cart, setCart] = useContext(CartContext);
 
-  const addToCart = () => {
-    const meal = { name: props.MealName, price: props.MealPrice, id: props.MealId, timestamp:0 };
-    setOrderList(meal);
-    writeUserData(meal.name, meal.price, meal.id, meal.timestamp);
-    setCart(currentState => [...currentState, meal]);
-   
-    
-  }
 
   arrayOfOrder.push(orderList);
  
-  
-
-
 
   const[mealsMeanu, setMealsMeanu] = useState(mealList);
  
     useEffect(() => {   
-      firebase.database().ref('Orders/Table4/Meals').on('value',(snap)=>{
+      firebase.database().ref('Orders/' + url +'/Meals').on('value',(snap)=>{
         setMealsMeanu(Object.values(snap.val()));
         
-    })}, [])
+    })}, url)
 
   const deleteToCart = () => {
-    
     const meal = { name: props.MealName, price: props.MealPrice, id: props.MealId, time: props.TimeStamp };
+    console.log(url);
     for(var k = 0; k<mealsMeanu.length; k++){
       if(mealsMeanu[k].MealName == meal.name){
-        let deletedRef = firebase.database().ref('Orders/Table4/Meals/' + mealsMeanu[k].TimeStamp);
+        let deletedRef = firebase.database().ref('Orders/'+ url + '/Meals/' + mealsMeanu[k].TimeStamp);
           deletedRef.remove();
           break;
      }
@@ -89,8 +86,6 @@ const MealCard = (props) => {
   const classes = useStyles();
   const { MeaLAvailability, MealDesc, MealId, MealImage, MealName, MealPrice , buttons} = props;
 
-
-  
   return (
     <Card className={classes.root} raised>
       <div className={classes.details}>

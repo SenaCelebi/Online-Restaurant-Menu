@@ -21,7 +21,7 @@ import { CartProvider } from './CartContext';
 import firebase from "./Config"
 
 
-const Collapsible = ({ title, subtitle, list, isManager }) => {
+const Collapsible = ({ title, subtitle, list, isManager, table }) => {
   const useStyles = makeStyles((theme) => ({
     column: {
       flexBasis: "33.33%",
@@ -41,7 +41,7 @@ const Collapsible = ({ title, subtitle, list, isManager }) => {
     return (
       <Grid item xs={12} sm={6}>
         <CartProvider>
-        <CardForShowOrder buttons={buttons}  {...menuObj} 
+        <CardForShowOrder buttons={buttons} table={table}  {...menuObj} 
         key={menuObj.MealId}/>
         </CartProvider>
       </Grid>

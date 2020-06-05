@@ -107,6 +107,7 @@ import CollapsibleForShowOrder from "./CollapsibleForShowOrder"
                  </Typography> */}
                   <Grid item>
                      <CollapsibleForShowOrder
+                      table={url}
                       list={updatedMenu}
                       title={"Order"}
                       subtitle={"Show Your Orders"}
