@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
-import firebase from '../../../Config';
+import firebase from '../Config';
 export default class LoginForm extends React.Component {
   constructor(props) {
     super(props);
