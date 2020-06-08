@@ -18,6 +18,7 @@ import CollapsibleForKitchenMenu from "./CollabsibleForKithchenMenu"
 import { Link } from "react-router-dom";
 
 const KitchenMenuPage = () => {
+  document.title="Welcome to Kitchen"; 
   const useStyles = makeStyles({
     root: {
       minWidth: 275,

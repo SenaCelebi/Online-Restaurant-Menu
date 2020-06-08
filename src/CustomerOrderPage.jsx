@@ -22,7 +22,7 @@ import { Link } from "react-router-dom";
   });*/
 
   const CustomerOrderPage = ({location}) => {
-
+document.title="MENU";
     console.log(location);
 
     const [url, setUrl] = useState('');

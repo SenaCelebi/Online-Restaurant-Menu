@@ -26,7 +26,7 @@ import { StateProvider } from './Checkout/StateContext';
 
 
 const ShowOrderPage = ({ location }) => {
-
+document.title="YOUR ORDERS";
   const [state, setstate] = useState(false)
 
   const [stripePromise, setStripePromise] = useState(null)
