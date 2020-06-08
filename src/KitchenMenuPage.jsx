@@ -103,6 +103,16 @@ const KitchenMenuPage = () => {
             image="https://www.barazzi.com/img/c/10.jpg"
             title="Table 5"
           />
+        <Grid container spacing={12}>
+        <Grid item xs={6} md={6} direction="row">
+        <CardHeader
+          title={"Kitchen Menu"}
+          subheader={"Change the availability of Meals"}
+        ></CardHeader>
+        </Grid >
+        <Grid item xs={6} md={6} direction="row"> 
+       <Button style={{marginLeft:"270px", marginTop:"25px"}}color="primary"  variant="contained" component={Link} to={'/kitchen/orders'}>KITCHEN ORDERS</Button></Grid> </Grid>
+        <CardContent></CardContent>
           <CardContent>
             <Grid container direction="column" spacing={4}>
               <Grid item>
@@ -126,7 +136,6 @@ const KitchenMenuPage = () => {
                   subtitle={"Select a dessert"}
                 />
               </Grid>
-              <Grid item xs={3} md={8}><Button color="primary"  variant="contained" component={Link} to={'/kitchen/orders'}>KITCHEN ORDERS</Button></Grid>
 
             </Grid>
           </CardContent>

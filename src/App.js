@@ -31,9 +31,9 @@ const App = () => {
         <Grid item container>
           <Grid item xs={false} sm={2} />
           <Grid item xs={12} sm={8}>
-            <Switch>
-            <Route exact path="/" component={CustomerOrderPage} />
-              <Route path="/orders" component={CustomerOrderPage} />
+            <Switch>  
+              <Route exact path="/" component={CustomerOrderPage} />
+              <Route path="/orders" component={CustomerOrderPage} />    
               <Route exact path="/kitchen/orders" component={KitchenOrdersPage} />
               <Route exact path="/kitchen/menu" component={KitchenMenuPage} />
               <Route exact path="/showOrders" component={ShowOrderPage} />

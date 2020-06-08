@@ -44,10 +44,15 @@ const KitchenOrdersPage = () => {
           image="https://ak5.picdn.net/shutterstock/videos/28204555/thumb/1.jpg"
           title="Table 5"
         />
+        <Grid container spacing={12}>
+        <Grid item xs={6} md={6} direction="row">
         <CardHeader
           title={"Orders"}
           subheader={"Orders from customers"}
         ></CardHeader>
+        </Grid >
+        <Grid item xs={6} md={6} direction="row"> 
+       <Button style={{marginLeft:"275px", marginTop:"25px"}}color="primary"  variant="contained" component={Link} to={'/kitchen/menu'}>KITCHEN MENU</Button></Grid> </Grid>
         <CardContent>
           <Grid container spacing={4}>
             {console.log(orderMenu)}
@@ -56,7 +61,6 @@ const KitchenOrdersPage = () => {
                 <OrderCard orderItem={table} />
               </Grid>
             ))}
-          <Grid item xs={3} md={8}><Button color="primary"  variant="contained" component={Link} to={'/kitchen/menu'}>KITCHEN MENU</Button></Grid>
           </Grid>
         </CardContent>
       </Card>

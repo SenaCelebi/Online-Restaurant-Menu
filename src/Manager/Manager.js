@@ -13,8 +13,9 @@ export default function Manager() {
     <React.StrictMode>
       <Frame />
       <Tabs />
-      <Grid item xs={3} md={8}><Button color="primary"  variant="contained" component={Link} to={'/kitchen/orders'}>KITCHEN ORDERS</Button></Grid>
-      <Grid item xs={3} md={8}><Button color="primary"  variant="contained" component={Link} to={'/kitchen/menu'}>KITCHEN MENU</Button></Grid>
+      <Grid   container   direction="row"   justify="flex-end"   alignItems="center" > 
+      <Button color="primary" style={{marginRight:"10px", marginTop:"2px"}} variant="contained" component={Link} to={'/kitchen/orders'}>KITCHEN ORDERS</Button> 
+      <Button color="primary" style={{marginTop:"2px"}} variant="contained" component={Link} to={'/kitchen/menu'}>KITCHEN MENU</Button> </Grid>
     </React.StrictMode>
   )
 
