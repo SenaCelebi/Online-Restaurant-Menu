@@ -126,18 +126,22 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 function Delete(itemName) {
   const deletClick = () => {
+    for(var i = 0; i<itemName.length; i++){
     const db = firebase.database()
     const ref = db.ref('Menu')
     ref.on('value', snap => {
       snap.forEach(childSnapshot => {
         const cat = childSnapshot.key
         childSnapshot.forEach(childSnapshot => {
-          if (itemName === childSnapshot.val().MealName) {
+          console.log(childSnapshot.val().MealName.toString())
+          console.log(itemName[i])
+          if (itemName[i] === childSnapshot.val().MealName) {
             ref.child(cat).child(childSnapshot.key).remove()
           }
         })
       })
     })
+  }
     
   }
   return (
@@ -171,7 +175,7 @@ const EnhancedTableToolbar = (props) => {
         {numSelected <= 0 ? (
           <MenuDialog />
         ) : (
-          Delete(itemName)
+            Delete(itemName)
           )}
       </Toolbar>
     </Paper>
