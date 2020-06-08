@@ -32,13 +32,13 @@ const App = () => {
           <Grid item xs={false} sm={2} />
           <Grid item xs={12} sm={8}>
             <Switch>  
-              <Route exact path="/customer" component={CustomerOrderPage} />
+              <Route exact path="/" component={CustomerOrderPage} />
               <Route path="/orders" component={CustomerOrderPage} />    
               <Route exact path="/kitchen/orders" component={KitchenOrdersPage} />
               <Route exact path="/kitchen/menu" component={KitchenMenuPage} />
               <Route exact path="/showOrders" component={ShowOrderPage} />
               <Route exact path="/manager" component={Manager}/>
-              <Route exact path="/" component={Login}/>
+              <Route exact path="/login" component={Login}/>
             </Switch>
           </Grid>
           <Grid item xs={false} sm={2} />
