@@ -132,7 +132,7 @@ const Steppers = () => {
                         direction="column"
                         justify="space-around"
                         alignItems="center"
-                        style={{ height: "400px" }}
+                        // style={{ height: "400px" }}
                     >
                         {cardStatus
                             ?

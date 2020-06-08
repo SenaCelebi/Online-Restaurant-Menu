@@ -3,9 +3,6 @@ import { Typography, Container, OutlinedInput, Button, IconButton, InputAdornmen
 import firebase from '../Config';
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import KitchenOrdersPage from "../KitchenOrdersPage";
-import Manager from "../Manager/Manager"
-import { Route, Switch } from 'react-router-dom'
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { Redirect } from "react-router-dom";
@@ -47,6 +44,8 @@ export default class LoginForm extends React.Component {
       })
     })
   }
+
+  
 
 
   handleChange = event => {
@@ -109,7 +108,10 @@ export default class LoginForm extends React.Component {
           </form>
         </div >
       </Container >
+      
     );
 
   }
 }
+
+
