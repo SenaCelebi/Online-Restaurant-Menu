@@ -108,7 +108,7 @@ const MealCard = (props) => {
       <div className={classes.details}>
         <CardHeader
           title={MealName}
-          subheader={"$" + MealPrice + "  " + MealAvailability }
+          subheader={"$" + MealPrice }
         />
         { showAddAlert === true ?         
         <Alert severity="success" onClose={() => {setShowAddAlert(false)}}>Meal Added to Orders</Alert>: "" }
