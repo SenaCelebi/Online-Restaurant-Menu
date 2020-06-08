@@ -1,66 +1,89 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
+import { Typography, Container, TextField, Button } from "@material-ui/core";
 import firebase from '../Config';
+import Avatar from '@material-ui/core/Avatar';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { Redirect } from "react-router-dom";
+
+
+
 export default class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      password: ""
+      password: "",
+      error: false,
+      manager: false,
+      kitchen: false
     };
   }
 
-  LOL(){
-    var Kpass = ''
-    var Mpass = ''
+
+  LOL() {
     const db = firebase.database()
     const Kref = db.ref().child('UserInfo').child('KitchenCode')
     const Mref = db.ref().child('UserInfo').child('ManagerCode')
-    Kref.on('value',snap=>{
-      Kpass = snap.val()
-    if(this.state.password==Kpass){
-      
-
-    }
+    Kref.on('value', snap => {
+      const Kpass = snap.val()
+      Mref.on('value', snap => {
+        const Mpass = snap.val()
+        if (this.state.password == Kpass) {
+          this.setState({
+            error: false,
+            kitchen: true
+          })
+        } else if (this.state.password == Mpass) {
+          this.setState({
+            error: false,
+            manger: true
+          })
+        }else {this.setState({ error: true }) }
+    })
   })
+}
 
-    Mref.on('value',snap=>{
-        Mpass = snap.val()
-        if(this.state.password==Mpass){
-          
-        }
-      })
-        
-        
+handleChange = event => {
+  this.setState({
+    password: event.target.value
+  });
+};
+
+handleSubmit = event => {
+  this.LOL()
+  console.log("Submitting");
+};
+
+render() {
+  if (this.state.manger) {
+    return <Redirect push to='/manager' />
   }
-
-  render() {
-
-    const {password } = this.state;
-    return (
-      <form>
-        <Typography>Password</Typography>
-        <input
-          name="password"
-          type="password"
-          placeholder="Enter your password"
-          value={password}
-          onChange={this.handleChange}
-        />
-        <button type="submit">Login</button>
-      </form>
-     
-    );
-    
+  if (this.state.kitchen) {
+    return <Redirect push to='/kitchen/orders' />
   }
+  return (
 
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  };
+    <Container maxWidth='ms'>
+      <div style={{ margin: (50), display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Avatar style={{ margin: (10) }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography color='primary' variant='h3'>Password</Typography>
+        <form style={{ width: (300), marginTop: (1), alignItems: 'center' }} noValidate>
+          <TextField
+            required
+            error={this.state.error}
+            margin='normal'
+            variant='outlined'
+            fullWidth
+            type="password"
+            placeholder="Enter your password"
+            onChange={this.handleChange}
+          />
+          <Button color='primary' fullWidth variant='contained' style={{ marginTop: (5) }} onClick={this.handleSubmit}>Login</Button>
+        </form>
+      </div >
+    </Container >
+  );
 
-  handleSubmit = event => {
-    console.log("Submitting");
-    console.log(this.state);
-  };
+}
 }
