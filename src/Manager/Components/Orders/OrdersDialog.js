@@ -45,7 +45,7 @@ export default function Digo() {
               OrderRef.child('Meals').child(time).set({
                 MealName: childSnapshot.val().MealName,
                 MealPrice: childSnapshot.val().MealPrice,
-                TimeStamp: Date.now()
+                TimeStamp: time
               })
             }
           })
