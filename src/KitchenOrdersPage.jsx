@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 
 
 const KitchenOrdersPage = () => {
+  document.title="Welcome to Kitchen";  
   const useStyles = makeStyles({
     root: {
       minWidth: 275,

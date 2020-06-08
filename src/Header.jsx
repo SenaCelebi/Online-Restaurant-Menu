@@ -21,6 +21,7 @@ const useStyles = makeStyles(() => ({
 
 
 const Header = () => {
+  document.title="Restaurant Menu";
   const classes = useStyles();
   
 
