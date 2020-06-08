@@ -35,7 +35,7 @@ const Header = () => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={3} md={1}><Button color="inherit" component={Link} to={'/login'}>LOGIN</Button></Grid>
+          <Grid item xs={3} md={1}><Button color="inherit" component={Link} to={'/'}>LOGIN</Button></Grid>
         </Grid>
       </Toolbar>
     </AppBar>
