@@ -126,6 +126,7 @@ const KitchenMenuPage = () => {
                   subtitle={"Select a dessert"}
                 />
               </Grid>
+              <Grid item xs={3} md={8}><Button color="primary"  variant="contained" component={Link} to={'/kitchen/orders'}>KITCHEN ORDERS</Button></Grid>
 
             </Grid>
           </CardContent>

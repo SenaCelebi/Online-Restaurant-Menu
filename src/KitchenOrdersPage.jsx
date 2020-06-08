@@ -13,6 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { orderList } from "./constants";
 import OrderCard from "./OrderCard";
 import firebase from "./Config";
+import { Link } from "react-router-dom";
 
 
 
@@ -55,6 +56,7 @@ const KitchenOrdersPage = () => {
                 <OrderCard orderItem={table} />
               </Grid>
             ))}
+          <Grid item xs={3} md={8}><Button color="primary"  variant="contained" component={Link} to={'/kitchen/menu'}>KITCHEN MENU</Button></Grid>
           </Grid>
         </CardContent>
       </Card>
